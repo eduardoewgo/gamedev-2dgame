@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <!-- CSS Section -->
+  <link rel="stylesheet" href="./Content/game.css" />
+  <title>Enumox Studio - Pongshot</title>
+</head>
+
+<body>
+  <div id="mainContent">
+    <!-- The game "lives" inside the canvas -->
+    <canvas id="canvas" width="1280" height="720"></canvas>
+  </div>
+
+  <!-- JavaScript Section -->
+
+  <!-- 3rd party libraries-->
+  <script src="./node_modules/easeljs/lib/easeljs.min.js"></script>
+  <script src="./node_modules/tweenjs/lib/tweenjs.min.js"></script>
+  <script src="./node_modules/soundjs/lib/soundjs.min.js"></script>
+  <script src="./node_modules/preloadjs/lib/preloadjs.min.js"></script>
+
+  <!-- Game Scripts -->
+  <script src="./Scripts/util/Util.js"></script>
+
+  <!-- Enums -->
+  <script src="./Scripts/enums/GameObjectType.js"></script>
+  <script src="./Scripts/enums/PlayerKeys.js"></script>
+  <script src="./Scripts/enums/PlayerId.js"></script>
+  <script src="./Scripts/enums/PowerUpStatus.js"></script>
+  <script src="./Scripts/enums/PowerUpTypes.js"></script>
+  <script src="./Scripts/enums/StatusTypes.js"></script>
+
+  <!-- Constants -->
+  <script src="./Scripts/constants/PlayerType.js"></script>
+
+  <!-- Component Scripts -->
+  <script src="./Scripts/util/Mathf.js"></script>
+  <script src="./Scripts/objects/Vector2.js"></script>
+  <script src="./Scripts/enums/GameObjectType.js"></script>
+  <script src="./Scripts/objects/GameObject.js"></script>
+  <script src="./Scripts/objects/Scene.js"></script>
+  <script src="./Scripts/scenes/State.js"></script>
+  <script src="./Scripts/config/Game.js"></script>
+  <script src="./Scripts/config/Settings.js"></script>
+
+  <!-- Managers -->
+  <script src="./Scripts/managers/Collision.js"></script>
+  <script src="./Scripts/managers/Keyboard.js"></script>
+  <script src="./Scripts/managers/GameBar.js"></script>
+
+  <!-- Game Objects -->
+  <script src="./Scripts/objects/Background.js"></script>
+  <script src="./Scripts/objects/Player.js"></script>
+  <script src="./Scripts/objects/PowerUp.js"></script>
+  <script src="./Scripts/objects/Label.js"></script>
+  <script src="./Scripts/objects/Button.js"></script>
+  <script src="./Scripts/objects/Image.js"></script>
+  <script src="./Scripts/objects/Grid.js"></script>
+  <script src="./Scripts/objects/Bullet.js"></script>
+  <script src="./Scripts/objects/GraphicBar.js"></script>
+  <script src="./Scripts/objects/PlayerStatus.js"></script>
+
+  <!-- Scenes -->
+  <script src="./Scripts/scenes/CompanyLogo.js"></script>
+  <script src="./Scripts/scenes/End.js"></script>
+  <script src="./Scripts/scenes/Play.js"></script>
+  <script src="./Scripts/scenes/Start.js"></script>
+
+  <script src="./Scripts/Game.js"></script>
+</body>
+
+</html>

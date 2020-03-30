@@ -1,0 +1,19 @@
+body {
+    background-color: lightgray;
+}
+
+#canvas {
+    background-color: white;
+    border: 1px dotted black;
+    border-radius: 10px;
+}
+
+#mainContent {
+    width: 1280px;
+    margin: 0 auto;
+}
+
+@font-face {
+    font-family: Pixel;
+    src: url(../Assets/fonts/1980202001.ttf);
+  }

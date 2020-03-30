@@ -1,0 +1,65 @@
+{
+
+"images": [
+    "itemsAtlas.png"
+],
+
+"framerate": 20,
+"frames": [
+    [0, 0, 15, 12, 0, 0, 0],
+    [15, 0, 20, 18, 0, 0, 0],
+    [35, 0, 32, 32, 0, 0, 0],
+    [67, 0, 32, 32, 0, 0, 0],
+    [99, 0, 32, 32, 0, 0, 0],
+    [131, 0, 32, 32, 0, 0, 0],
+    [163, 0, 32, 32, 0, 0, 0],
+    [195, 0, 32, 32, 0, 0, 0],
+    [0, 32, 32, 32, 0, 0, 0],
+    [32, 32, 32, 32, 0, 0, 0],
+    [64, 32, 32, 32, 0, 0, 0],
+    [96, 32, 32, 32, 0, 0, 0],
+    [128, 32, 32, 32, 0, 0, 0],
+    [160, 32, 71, 56, 0, 0, 0],
+    [0, 88, 72, 56, 0, 0, 0],
+    [72, 88, 72, 56, 0, 0, 0],
+    [144, 88, 72, 56, 0, 0, 0],
+    [0, 144, 72, 56, 0, 0, 0],
+    [72, 144, 72, 56, 0, 0, 0],
+    [0, 200, 128, 128, 0, 0, 0],
+    [128, 200, 128, 128, 0, 0, 0],
+    [0, 328, 200, 200, 0, 0, 0],
+    [0, 528, 200, 200, 0, 0, 0]
+],
+
+"animations": {
+    "btn_confirm": { "frames": [0] },
+    "heart": { "frames": [1] },
+    "attack1": { "frames": [2] },
+    "item_armor": { "frames": [3] },
+    "item_armor_disabled": { "frames": [4] },
+    "item_boots": { "frames": [5] },
+    "item_boots_disabled": { "frames": [6] },
+    "item_hp": { "frames": [7] },
+    "item_spellScroll": { "frames": [8] },
+    "item_spellScroll_disabled": { "frames": [9] },
+    "item_trap": { "frames": [10] },
+    "item_trap_disabled": { "frames": [11] },
+    "item_xp": { "frames": [12] },
+    "mage_attack": { "frames": [13] },
+    "mage": { "frames": [14] },
+    "mage_hit": { "frames": [15] },
+    "rogue": { "frames": [16] },
+    "rogue_attack": { "frames": [17] },
+    "rogue_hit": { "frames": [18] },
+    "attack2": { "frames": [19] },
+    "attack_collision": { "frames": [20] },
+    "btn_back": { "frames": [21] },
+    "btn_play": { "frames": [22] }
+},
+
+"texturepacker": [
+        "SmartUpdateHash: $TexturePacker:SmartUpdate:c6ae3d5521770447195eac95195a8575:c809b2663df9a880d9c8c17553c05d6b:172d07b30a855084c6189f43345a3b20$",
+        "Created with TexturePacker (https://www.codeandweb.com/texturepacker) for EaselJS"
+]
+
+}
