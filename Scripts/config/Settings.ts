@@ -1,7 +1,9 @@
 module config {
     export class Settings {
-        public static KeyPlayerOneUp: number = 87; // W
-        public static KeyPlayerOneDown: number = 83; // S
+        public static KeyPlayerLeft: number = 37; // LEFT ARROW
+        public static KeyPlayerRight: number = 39; // RIGHT ARROW
+        public static KeyPlayerUp: number = 38; // UP ARROW
+
         public static KeyPlayerOneCCW: number = 65; // A
         public static KeyPlayerOneCW: number = 68; // D
         public static KeyPlayerOneShoot: number = 69; // E

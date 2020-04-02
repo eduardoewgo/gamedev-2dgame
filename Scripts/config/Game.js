@@ -4,6 +4,7 @@ var config;
     var Game = /** @class */ (function () {
         function Game() {
         }
+        Game.SCREEN_SAFE_AREA = 60;
         Game.SCREEN_WIDTH = 1280;
         Game.SCREEN_HEIGHT = 720;
         Game.FPS = 60; // 60 Frames per second

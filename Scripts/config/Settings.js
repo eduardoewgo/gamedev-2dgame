@@ -4,8 +4,9 @@ var config;
     var Settings = /** @class */ (function () {
         function Settings() {
         }
-        Settings.KeyPlayerOneUp = 87; // W
-        Settings.KeyPlayerOneDown = 83; // S
+        Settings.KeyPlayerLeft = 37; // LEFT ARROW
+        Settings.KeyPlayerRight = 39; // RIGHT ARROW
+        Settings.KeyPlayerUp = 38; // UP ARROW
         Settings.KeyPlayerOneCCW = 65; // A
         Settings.KeyPlayerOneCW = 68; // D
         Settings.KeyPlayerOneShoot = 69; // E

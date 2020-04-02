@@ -21,11 +21,11 @@ module objects {
 
         // PRIVATE METHODS
         protected _checkBounds(): void {
-            // Upper and lower bound
-            if (this.position.y < config.Game.GAME_BAR_HEIGHT + this.halfHeight) {
-                this.position = new Vector2(this.position.x, config.Game.GAME_BAR_HEIGHT + this.halfHeight);
-            } else if (this.position.y > config.Game.SCREEN_HEIGHT - this.halfHeight) {
-                this.position = new Vector2(this.position.x, config.Game.SCREEN_HEIGHT - this.halfHeight);
+            // Sides bound
+            if (this.position.x <= config.Game.SCREEN_SAFE_AREA) {
+                this.position = new Vector2(config.Game.SCREEN_SAFE_AREA, this.position.y);
+            } else if (this.position.x >= config.Game.SCREEN_WIDTH - config.Game.SCREEN_SAFE_AREA) {
+                this.position = new Vector2(config.Game.SCREEN_WIDTH - config.Game.SCREEN_SAFE_AREA, this.position.y);
             }
         }
 
@@ -35,9 +35,9 @@ module objects {
 
             // Verify the direction and set the y speed
             if (playerKeys[enums.PlayerKeys.MOVE_UP] && !playerKeys[enums.PlayerKeys.MOVE_DOWN]) {
-                velocity = new Vector2(0, -this._playerVel);
+                velocity = new Vector2(-this._playerVel, 0);
             } else if (playerKeys[enums.PlayerKeys.MOVE_DOWN] && !playerKeys[enums.PlayerKeys.MOVE_UP]) {
-                velocity = new Vector2(0, this._playerVel);
+                velocity = new Vector2(this._playerVel, 0);
             }
 
             this.position = Vector2.add(this.position, velocity);

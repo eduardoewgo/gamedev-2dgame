@@ -1,5 +1,6 @@
 module config {
     export class Game {
+        public static SCREEN_SAFE_AREA: number = 60;
         public static SCREEN_WIDTH: number = 1280;
         public static SCREEN_HEIGHT: number = 720;
         public static GAME_BAR: managers.GameBar;
