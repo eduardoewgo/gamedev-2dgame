@@ -21,8 +21,8 @@ var objects;
             var _this = 
             // from https://opengameart.org/content/bullets-game-asset
             //super(config.Game.ASSETS.getResult("attack1"));
-            _super.call(this, config.Game.ATLAS, "attack1") || this;
-            _this._bulletVel = 20;
+            _super.call(this, config.Game.ATLAS2, "Attack/linear-fire") || this;
+            _this._bulletVel = 1;
             _this.position = new objects.Vector2(startPosition.x, startPosition.y, _this);
             //this.x = startPosition.x;
             //this.y = startPosition.y;

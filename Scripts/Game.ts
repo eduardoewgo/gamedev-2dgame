@@ -1,6 +1,9 @@
 //IIFE - Immediately Invoked Function Expression
 //means -> self-executing anonymous function
-let Game = (function() {
+import Sprite = createjs.Sprite;
+import SpriteSheet = createjs.SpriteSheet;
+
+let Game = (function () {
     // variable declarations
     let canvas: HTMLCanvasElement = document.getElementsByTagName("canvas")[0];
     let stage: createjs.Stage;
@@ -13,41 +16,45 @@ let Game = (function() {
     let itemsAtlas: createjs.SpriteSheet;
 
     let assetManifest = [
+        // New sprites folder
+        {id: "game", src: "./Assets/sprites/mysprites.json", type: "spritesheet"},
+
         // Images
-        { id: "companyLogo", src: "./Assets/images/CompanyLogo.png" },
-        { id: "blackBackground", src: "./Assets/images/bg_blackBackground.png" },
-        { id: "forestBackground", src: "./Assets/images/bg_forest.png" },
-        { id: "heart", src: "./Assets/images/heart.png" },
+        {id: "companyLogo", src: "./Assets/images/CompanyLogo.png"},
+        {id: "blackBackground", src: "./Assets/images/bg_blackBackground.png"},
+        {id: "forestBackground", src: "./Assets/images/bg_forest.png"},
+        {id: "heart", src: "./Assets/images/heart.png"},
 
         // Buttons
-        { id: "btnConfirm", src: "./Assets/images/btn_confirm.png" },
-        { id: "btnPlay", src: "./Assets/images/btn_play.png" },
-        { id: "btnConfirm", src: "./Assets/images/btn_confirm.png" },
-        { id: "btnBack", src: "./Assets/images/btn_back.png" },
+        {id: "btnConfirm", src: "./Assets/images/btn_confirm.png"},
+        {id: "btnPlay", src: "./Assets/images/btn_play.png"},
+        {id: "btnConfirm", src: "./Assets/images/btn_confirm.png"},
+        {id: "btnBack", src: "./Assets/images/btn_back.png"},
 
         // Characters
-        { id: "mage", src: "./Assets/images/mage.png" },
-        { id: "mageAttack", src: "./Assets/images/mage_attack.png" },
-        { id: "mageHit", src: "./Assets/images/mage_hit.png" },
-        { id: "rogue", src: "./Assets/images/rogue.png" },
-        { id: "rogueAttack", src: "./Assets/images/rogue_attack.png" },
-        { id: "rogueHit", src: "./Assets/images/rogue_hit.png" },
+        {id: "mage", src: "./Assets/images/mage.png"},
+        {id: "mageAttack", src: "./Assets/images/mage_attack.png"},
+        {id: "mageHit", src: "./Assets/images/mage_hit.png"},
+        {id: "rogue", src: "./Assets/images/rogue.png"},
+        {id: "rogueAttack", src: "./Assets/images/rogue_attack.png"},
+        {id: "rogueHit", src: "./Assets/images/rogue_hit.png"},
 
         // Attacks
-        { id: "attack1", src: "./Assets/images/attack1.png" },
-        { id: "attack2", src: "./Assets/images/attack2.png" },
-        { id: "attackCollision", src: "./Assets/images/attack_collision.png" },
+        {id: "attack1", src: "./Assets/images/attack1.png"},
+        {id: "attack2", src: "./Assets/images/attack2.png"},
+        {id: "attackCollision", src: "./Assets/images/attack_collision.png"},
 
-        // Items Atlas
-        { id: "itemAtlas", src: "./Assets/sprites/itemsAtlas.png" },
+        // Atlas
+        {id: "itemAtlas", src: "./Assets/sprites/itemsAtlas.png"},
+        {id: "gameAtlas", src: "./Assets/sprites/mysprites.png"},
 
         // Items
-        { id: "itemArmor", src: "./Assets/images/item_armor.png" },
-        { id: "itemBoots", src: "./Assets/images/item_boots.png" },
-        { id: "itemHp", src: "./Assets/images/item_hp.png" },
-        { id: "itemSpellScroll", src: "./Assets/images/item_spellScroll.png" },
-        { id: "itemXp", src: "./Assets/images/item_xp.png" },
-        { id: "itemTrap", src: "./Assets/images/item_trap.png" }
+        {id: "itemArmor", src: "./Assets/images/item_armor.png"},
+        {id: "itemBoots", src: "./Assets/images/item_boots.png"},
+        {id: "itemHp", src: "./Assets/images/item_hp.png"},
+        {id: "itemSpellScroll", src: "./Assets/images/item_spellScroll.png"},
+        {id: "itemXp", src: "./Assets/images/item_xp.png"},
+        {id: "itemTrap", src: "./Assets/images/item_trap.png"}
     ];
 
     let itemsSpriteData = {
@@ -78,29 +85,29 @@ let Game = (function() {
             [0, 528, 200, 200, 0, 0, 0]
         ],
         animations: {
-            btnConfirm: { frames: [0] },
-            heart: { frames: [1] },
-            attack1: { frames: [2] },
-            armor: { frames: [3] },
-            armorDis: { frames: [4] },
-            boots: { frames: [5] },
-            bootsDis: { frames: [6] },
-            itemHp: { frames: [7] },
-            spellScroll: { frames: [8] },
-            spellScrollDis: { frames: [9] },
-            trap: { frames: [10] },
-            trapDis: { frames: [11] },
-            itemXp: { frames: [12] },
-            mageAttack: { frames: [13] },
-            mage: { frames: [14] },
-            mageHit: { frames: [15] },
-            rogue: { frames: [16] },
-            rogueAttack: { frames: [17] },
-            rogueHit: { frames: [18] },
-            attack2: { frames: [19] },
-            attackCollision: { frames: [20] },
-            btnBack: { frames: [21] },
-            btnPlay: { frames: [22] },
+            btnConfirm: {frames: [0]},
+            heart: {frames: [1]},
+            attack1: {frames: [2]},
+            armor: {frames: [3]},
+            armorDis: {frames: [4]},
+            boots: {frames: [5]},
+            bootsDis: {frames: [6]},
+            itemHp: {frames: [7]},
+            spellScroll: {frames: [8]},
+            spellScrollDis: {frames: [9]},
+            trap: {frames: [10]},
+            trapDis: {frames: [11]},
+            itemXp: {frames: [12]},
+            mageAttack: {frames: [13]},
+            mage: {frames: [14]},
+            mageHit: {frames: [15]},
+            rogue: {frames: [16]},
+            rogueAttack: {frames: [17]},
+            rogueHit: {frames: [18]},
+            attack2: {frames: [19]},
+            attackCollision: {frames: [20]},
+            btnBack: {frames: [21]},
+            btnPlay: {frames: [22]},
             armorHalftime: {
                 frames: [3, 4],
                 speed: 0.8
@@ -158,7 +165,10 @@ let Game = (function() {
         // Load the atlas
         itemsSpriteData.images = [assets.getResult("itemAtlas")];
         itemsAtlas = new createjs.SpriteSheet(itemsSpriteData);
+
+        // TODO: refactor the atlas.
         config.Game.ATLAS = itemsAtlas;
+        config.Game.ATLAS2 = assets.getResult("game") as SpriteSheet;
 
         currentSceneState = scenes.State.NO_SCENE;
         config.Game.SCENE = scenes.State.COMPANY_LOGO;

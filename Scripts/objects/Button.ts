@@ -4,14 +4,14 @@ module objects {
 
         // constructor
         constructor(
-            buttonName: string = "button",
+            assetName: string = "button",
             x: number = 0,
             y: number = 0,
             isCentered: boolean = false,
             scale: number = 1,
             mirror: boolean = false
         ) {
-            super(config.Game.ATLAS, buttonName, x, y, isCentered);
+            super(config.Game.ATLAS2, assetName, x, y, isCentered);
 
             this.on("mouseover", this.MouseOver);
             this.on("mouseout", this.MouseOut);

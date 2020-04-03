@@ -17,14 +17,14 @@ var objects;
     var Button = /** @class */ (function (_super) {
         __extends(Button, _super);
         // constructor
-        function Button(buttonName, x, y, isCentered, scale, mirror) {
-            if (buttonName === void 0) { buttonName = "button"; }
+        function Button(assetName, x, y, isCentered, scale, mirror) {
+            if (assetName === void 0) { assetName = "button"; }
             if (x === void 0) { x = 0; }
             if (y === void 0) { y = 0; }
             if (isCentered === void 0) { isCentered = false; }
             if (scale === void 0) { scale = 1; }
             if (mirror === void 0) { mirror = false; }
-            var _this = _super.call(this, config.Game.ATLAS, buttonName, x, y, isCentered) || this;
+            var _this = _super.call(this, config.Game.ATLAS2, assetName, x, y, isCentered) || this;
             _this._selected = null;
             _this.on("mouseover", _this.MouseOver);
             _this.on("mouseout", _this.MouseOut);

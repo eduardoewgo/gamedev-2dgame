@@ -3,7 +3,7 @@ module scenes {
         // PRIVATE INSTANCE MEMBERS
         private _background: objects.Background;
         private _gameTitle: objects.Label;
-        private _player1Label: objects.Label;
+        private _playerLabel: objects.Label;
         private _startButton: objects.Button;
 
         // Player selection handlers
@@ -30,23 +30,45 @@ module scenes {
             this._background = new objects.Background(config.Game.ASSETS.getResult("blackBackground"));
 
             // Labels
-            this._player1Label = new objects.Label("Player One", "60px", "Pixel", "#ffcc5c", 300, 200, true);
             this._gameTitle = new objects.Label(
-                "Pongshot",
+                "Hero Quest",
                 "120px",
                 "Pixel",
                 "#96ceb2",
-                config.Game.SCREEN_WIDTH / 2,
+                config.Game.SCREEN_WIDTH / 2 + 30, // For some reason this isn't being centered
                 100,
                 true
             );
+            this._playerLabel = new objects.Label(
+                "Select your hero",
+                "60px",
+                "Pixel",
+                "#ffcc5c",
+                config.Game.SCREEN_WIDTH / 2,
+                config.Game.SCREEN_HEIGHT / 2 - 100,
+                true);
 
             // Buttons
-            this._startButton = new objects.Button("btnPlay", 640, config.Game.SCREEN_HEIGHT - 100, true);
+            this._startButton = new objects.Button(
+                "GUI/PS4-X",
+                640,
+                config.Game.SCREEN_HEIGHT - 100,
+                true,
+                3);
 
             // Player one
-            this._p1MageButton = new objects.Button("mage", 300, 300, true, 1.5);
-            this._p1RogueButton = new objects.Button("rogue", 300, 400, true, 1.5);
+            this._p1MageButton = new objects.Button(
+                "Player/Mage/Idle/idle",
+                config.Game.SCREEN_WIDTH / 2 - 100,
+                config.Game.SCREEN_HEIGHT / 2 + 50,
+                false,
+                1.5);
+            this._p1RogueButton = new objects.Button(
+                "Player/Rogue/Idle/idle",
+                config.Game.SCREEN_WIDTH / 2 + 50,
+                config.Game.SCREEN_HEIGHT / 2 + 50,
+                false,
+                1.5);
 
             this.Main();
         }
@@ -57,7 +79,7 @@ module scenes {
         public Main(): void {
             this.addChild(this._background);
             this.addChild(this._gameTitle);
-            this.addChild(this._player1Label);
+            this.addChild(this._playerLabel);
             this.addChild(this._startButton);
 
             this.addChild(this._p1MageButton);
@@ -98,6 +120,19 @@ module scenes {
 
             // Call this once here to "initialize" as inactive
             this.validateGame();
+
+            // TODO: use this to create the tiles
+            // for (let i = 0; i < 5; i++) {
+            //     let floor = new createjs.Sprite(config.Game.ASSETS.getResult("sheet1") as any, "tile");
+            //     floor.x = i * 31;
+            //     floor.y = config.Game.SCREEN_HEIGHT - config.Game.SCREEN_SAFE_AREA;
+            //     this.addChild(floor);
+            // }
+            //
+            // let demon = new createjs.Sprite(config.Game.ASSETS.getResult("sheet1") as any, "demon-idle");
+            // demon.x = config.Game.SCREEN_SAFE_AREA;
+            // demon.y = config.Game.SCREEN_HEIGHT - config.Game.SCREEN_SAFE_AREA;
+            // this.addChild(demon);
         }
 
         private validateGame(): void {

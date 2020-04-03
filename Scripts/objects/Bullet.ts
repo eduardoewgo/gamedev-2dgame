@@ -1,6 +1,6 @@
 module objects {
     export class Bullet extends objects.GameObject {
-        private _bulletVel: number = 20;
+        private _bulletVel: number = 1;
         private _player: enums.PlayerId;
         //private _active:boolean;
 
@@ -21,7 +21,7 @@ module objects {
         constructor(startPosition: Vector2, player: enums.PlayerId = enums.PlayerId.PLAYER) {
             // from https://opengameart.org/content/bullets-game-asset
             //super(config.Game.ASSETS.getResult("attack1"));
-            super(config.Game.ATLAS, "attack1");
+            super(config.Game.ATLAS2, "Attack/linear-fire");
             this.position = new Vector2(startPosition.x, startPosition.y, this);
             //this.x = startPosition.x;
             //this.y = startPosition.y;

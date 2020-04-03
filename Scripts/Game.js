@@ -1,6 +1,8 @@
 "use strict";
 //IIFE - Immediately Invoked Function Expression
 //means -> self-executing anonymous function
+var Sprite = createjs.Sprite;
+var SpriteSheet = createjs.SpriteSheet;
 var Game = (function () {
     // variable declarations
     var canvas = document.getElementsByTagName("canvas")[0];
@@ -10,6 +12,8 @@ var Game = (function () {
     var assets;
     var itemsAtlas;
     var assetManifest = [
+        // New sprites folder
+        { id: "game", src: "./Assets/sprites/mysprites.json", type: "spritesheet" },
         // Images
         { id: "companyLogo", src: "./Assets/images/CompanyLogo.png" },
         { id: "blackBackground", src: "./Assets/images/bg_blackBackground.png" },
@@ -31,8 +35,9 @@ var Game = (function () {
         { id: "attack1", src: "./Assets/images/attack1.png" },
         { id: "attack2", src: "./Assets/images/attack2.png" },
         { id: "attackCollision", src: "./Assets/images/attack_collision.png" },
-        // Items Atlas
+        // Atlas
         { id: "itemAtlas", src: "./Assets/sprites/itemsAtlas.png" },
+        { id: "gameAtlas", src: "./Assets/sprites/mysprites.png" },
         // Items
         { id: "itemArmor", src: "./Assets/images/item_armor.png" },
         { id: "itemBoots", src: "./Assets/images/item_boots.png" },
@@ -146,7 +151,9 @@ var Game = (function () {
         // Load the atlas
         itemsSpriteData.images = [assets.getResult("itemAtlas")];
         itemsAtlas = new createjs.SpriteSheet(itemsSpriteData);
+        // TODO: refactor the atlas.
         config.Game.ATLAS = itemsAtlas;
+        config.Game.ATLAS2 = assets.getResult("game");
         currentSceneState = scenes.State.NO_SCENE;
         config.Game.SCENE = scenes.State.COMPANY_LOGO;
     }
