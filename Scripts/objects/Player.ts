@@ -66,16 +66,19 @@ module objects {
         }
 
         public Reset(): void {
-            if (this._playerId == enums.PlayerId.PLAYER_TWO) {
+            if (this._playerId == enums.PlayerId.ENEMY) {
                 // Mirror the second player by default
                 this.scaleX = -1;
 
                 this.position = new Vector2(
-                    config.Game.SCREEN_WIDTH - this.halfWidth,
-                    config.Game.GAME_BAR_HEIGHT + this.halfHeight
+                    config.Game.SCREEN_WIDTH - config.Game.SCREEN_SAFE_AREA,
+                    config.Game.SCREEN_HEIGHT - config.Game.SCREEN_SAFE_AREA
                 );
             } else {
-                this.position = new Vector2(this.halfWidth, config.Game.GAME_BAR_HEIGHT + this.halfHeight);
+                this.position = new Vector2(
+                    config.Game.SCREEN_SAFE_AREA,
+                    config.Game.SCREEN_HEIGHT - config.Game.SCREEN_SAFE_AREA
+                );
             }
         }
     }

@@ -18,7 +18,7 @@ module objects {
             return this._player;
         }
 
-        constructor(startPosition: Vector2, player: enums.PlayerId = enums.PlayerId.PLAYER_ONE) {
+        constructor(startPosition: Vector2, player: enums.PlayerId = enums.PlayerId.PLAYER) {
             // from https://opengameart.org/content/bullets-game-asset
             //super(config.Game.ASSETS.getResult("attack1"));
             super(config.Game.ATLAS, "attack1");
@@ -32,7 +32,7 @@ module objects {
         protected _checkBounds(): void {}
 
         public isOutOfBounds(): boolean {
-            if (this._player == enums.PlayerId.PLAYER_TWO) {
+            if (this._player == enums.PlayerId.ENEMY) {
                 return this.x > config.Game.SCREEN_WIDTH;
             } else {
                 return this.x < 0;
@@ -42,7 +42,7 @@ module objects {
         public Start(): void {}
 
         public Update(): void {
-            if (this._player == enums.PlayerId.PLAYER_TWO) {
+            if (this._player == enums.PlayerId.ENEMY) {
                 this.position.x -= this._bulletVel;
             } else {
                 this.position.x += this._bulletVel;

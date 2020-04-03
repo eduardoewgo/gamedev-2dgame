@@ -82,7 +82,7 @@ module objects {
             this._halfWidth = 0;
             this._halfHeight = 0;
             this._position = new Vector2(0, 0, this);
-            this._isCentered = false;
+            this._isCentered = true;
 
             this.width = this.getBounds().width;
             this.height = this.getBounds().height;

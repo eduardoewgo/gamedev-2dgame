@@ -51,17 +51,17 @@ var scenes;
             }
             // Check for player two bullet collisions
             var bulletHit = false;
-            if (e.Player == enums.PlayerId.PLAYER_TWO) {
+            if (e.Player == enums.PlayerId.ENEMY) {
                 if (managers.Collision.AABBCheck(this._player1, e)) {
                     this._player1.Hit();
-                    this._gameBar.PostDamage(enums.PlayerId.PLAYER_ONE, config.Game.PLAYER1_STATUS.CalculateDamage(config.Game.PLAYER2_STATUS.GetValue(enums.StatusTypes.ATK_POWER)));
+                    this._gameBar.PostDamage(enums.PlayerId.PLAYER, config.Game.PLAYER_STATUS.CalculateDamage(config.Game.ENEMY_STATUS.GetValue(enums.StatusTypes.ATK_POWER)));
                     bulletHit = true;
                 }
             }
-            else if (e.Player == enums.PlayerId.PLAYER_ONE) {
+            else if (e.Player == enums.PlayerId.PLAYER) {
                 if (managers.Collision.AABBCheck(this._player2, e)) {
                     this._player2.Hit();
-                    this._gameBar.PostDamage(enums.PlayerId.PLAYER_TWO, config.Game.PLAYER2_STATUS.CalculateDamage(config.Game.PLAYER1_STATUS.GetValue(enums.StatusTypes.ATK_POWER)));
+                    this._gameBar.PostDamage(enums.PlayerId.ENEMY, config.Game.ENEMY_STATUS.CalculateDamage(config.Game.PLAYER_STATUS.GetValue(enums.StatusTypes.ATK_POWER)));
                     bulletHit = true;
                 }
             }
@@ -87,7 +87,7 @@ var scenes;
             return result;
         };
         Play.prototype._activatePowerUp = function (pu, playerId) {
-            var status = playerId == enums.PlayerId.PLAYER_ONE ? config.Game.PLAYER1_STATUS : config.Game.PLAYER2_STATUS;
+            var status = playerId == enums.PlayerId.PLAYER ? config.Game.PLAYER_STATUS : config.Game.ENEMY_STATUS;
             switch (pu.PowerType) {
                 case enums.PowerUpTypes.ARMOR:
                 case enums.PowerUpTypes.ATTACK_POWER:
@@ -97,7 +97,7 @@ var scenes;
                 case enums.PowerUpTypes.TRAP:
                     // Change the player before sending the status
                     status =
-                        playerId == enums.PlayerId.PLAYER_ONE ? config.Game.PLAYER2_STATUS : config.Game.PLAYER1_STATUS;
+                        playerId == enums.PlayerId.PLAYER ? config.Game.ENEMY_STATUS : config.Game.PLAYER_STATUS;
                     status.ActivatePowerUp(pu, createjs.Ticker.getTicks());
                     break;
                 case enums.PowerUpTypes.POTION_HP:
@@ -124,8 +124,8 @@ var scenes;
             // Background
             this._background = new objects.Background(config.Game.ASSETS.getResult("forestBackground"));
             // Create the players
-            this._player1 = new objects.Player(enums.PlayerId.PLAYER_ONE, config.Game.PLAYER1_CHARACTER);
-            this._player2 = new objects.Player(enums.PlayerId.PLAYER_TWO, config.Game.PLAYER2_CHARACTER);
+            this._player1 = new objects.Player(enums.PlayerId.PLAYER, config.Game.PLAYER_CHARACTER);
+            this._player2 = new objects.Player(enums.PlayerId.ENEMY, config.Game.ENEMY_CHARACTER);
             setInterval(function () {
                 // TODO: make this timer logic work somehow and check for item collision.
                 // this._powerUp = new objects.PowerUp();
@@ -144,20 +144,20 @@ var scenes;
         Play.prototype.Update = function () {
             var _this = this;
             // Do not allow player 1 to move if it is trapped
-            if (config.Game.PLAYER1_STATUS.GetPowerStatus(enums.StatusTypes.TRAP) == enums.PowerUpStatus.INACTIVE) {
+            if (config.Game.PLAYER_STATUS.GetPowerStatus(enums.StatusTypes.TRAP) == enums.PowerUpStatus.INACTIVE) {
                 this._player1.Update();
             }
-            if (config.Game.PLAYER2_STATUS.GetPowerStatus(enums.StatusTypes.TRAP) == enums.PowerUpStatus.INACTIVE) {
+            if (config.Game.ENEMY_STATUS.GetPowerStatus(enums.StatusTypes.TRAP) == enums.PowerUpStatus.INACTIVE) {
                 this._player2.Update();
             }
             this._gameBar.Update();
-            this._plrOneBulletTick = this._plrShoot(this._player1, config.Game.PLAYER1_STATUS, this._plrOneBulletTick);
-            this._plrTwoBulletTick = this._plrShoot(this._player2, config.Game.PLAYER2_STATUS, this._plrTwoBulletTick);
-            config.Game.PLAYER1_STATUS.Update();
-            config.Game.PLAYER2_STATUS.Update();
+            this._plrOneBulletTick = this._plrShoot(this._player1, config.Game.PLAYER_STATUS, this._plrOneBulletTick);
+            this._plrTwoBulletTick = this._plrShoot(this._player2, config.Game.ENEMY_STATUS, this._plrTwoBulletTick);
+            config.Game.PLAYER_STATUS.Update();
+            config.Game.ENEMY_STATUS.Update();
             this._bullets.forEach(function (e, index) {
                 _this._checkBullet(e, index);
-                if (e.Player == enums.PlayerId.PLAYER_ONE) {
+                if (e.Player == enums.PlayerId.PLAYER) {
                 }
             });
             this._createPowerUp();

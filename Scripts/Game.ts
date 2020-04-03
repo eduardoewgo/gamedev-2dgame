@@ -16,7 +16,7 @@ let Game = (function() {
         // Images
         { id: "companyLogo", src: "./Assets/images/CompanyLogo.png" },
         { id: "blackBackground", src: "./Assets/images/bg_blackBackground.png" },
-        { id: "forestBackground", src: "./Assets/images/bg-forest.png" },
+        { id: "forestBackground", src: "./Assets/images/bg_forest.png" },
         { id: "heart", src: "./Assets/images/heart.png" },
 
         // Buttons

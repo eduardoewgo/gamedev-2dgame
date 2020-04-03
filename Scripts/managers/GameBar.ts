@@ -163,13 +163,13 @@ module managers {
         }
 
         public PostDamage(player: enums.PlayerId, damage: number): void {
-            if (player == enums.PlayerId.PLAYER_ONE) {
+            if (player == enums.PlayerId.PLAYER) {
                 this._plrOneLife -= damage;
                 this._plrOneLifeBar.Value = this._plrOneLife;
 
                 if (this._plrOneLife <= 0) {
                     config.Game.SCENE = scenes.State.END;
-                    config.Game.WINNER = enums.PlayerId.PLAYER_TWO;
+                    config.Game.WINNER = enums.PlayerId.ENEMY;
                 }
             } else {
                 this._plrTwoLife -= damage;
@@ -177,37 +177,37 @@ module managers {
 
                 if (this._plrTwoLife <= 0) {
                     config.Game.SCENE = scenes.State.END;
-                    config.Game.WINNER = enums.PlayerId.PLAYER_ONE;
+                    config.Game.WINNER = enums.PlayerId.PLAYER;
                 }
             }
         }
 
         public ReceiveExperience(player: enums.PlayerId): void {
-            if (player == enums.PlayerId.PLAYER_ONE) {
-                let posXpLvl = config.Game.PLAYER1_STATUS.Level;
+            if (player == enums.PlayerId.PLAYER) {
+                let posXpLvl = config.Game.PLAYER_STATUS.Level;
                 if (posXpLvl < constants.MAX_LEVEL) {
                     posXpLvl--;
                     this._plrOneXp += XP_POTION_VALUE;
 
                     if (this._plrOneXp >= XP_PER_LEVEL[posXpLvl]) {
-                        config.Game.PLAYER1_STATUS.LevelUp();
-                        this._plrOneLevelLabel.setText(`LVL ${config.Game.PLAYER1_STATUS.Level}`);
-                        if (config.Game.PLAYER1_STATUS.Level < constants.MAX_LEVEL) {
+                        config.Game.PLAYER_STATUS.LevelUp();
+                        this._plrOneLevelLabel.setText(`LVL ${config.Game.PLAYER_STATUS.Level}`);
+                        if (config.Game.PLAYER_STATUS.Level < constants.MAX_LEVEL) {
                             this._plrOneXp = 0;
                         }
                     }
                     this._plrOneXpBar.Value = (100 * this._plrOneXp) / XP_PER_LEVEL[posXpLvl];
                 }
-            } else if (player == enums.PlayerId.PLAYER_TWO) {
-                let posXpLvl = config.Game.PLAYER2_STATUS.Level;
+            } else if (player == enums.PlayerId.ENEMY) {
+                let posXpLvl = config.Game.ENEMY_STATUS.Level;
                 if (posXpLvl < constants.MAX_LEVEL) {
                     posXpLvl--;
                     this._plrTwoXp += XP_POTION_VALUE;
 
                     if (this._plrTwoXp >= XP_PER_LEVEL[posXpLvl]) {
-                        config.Game.PLAYER2_STATUS.LevelUp();
-                        this._plrTwoLevelLabel.setText(`LVL ${config.Game.PLAYER2_STATUS.Level}`);
-                        if (config.Game.PLAYER2_STATUS.Level < constants.MAX_LEVEL) {
+                        config.Game.ENEMY_STATUS.LevelUp();
+                        this._plrTwoLevelLabel.setText(`LVL ${config.Game.ENEMY_STATUS.Level}`);
+                        if (config.Game.ENEMY_STATUS.Level < constants.MAX_LEVEL) {
                             this._plrTwoXp = 0;
                         }
                     }
@@ -217,13 +217,13 @@ module managers {
         }
 
         public ReceiveHealing(player: enums.PlayerId): void {
-            if (player == enums.PlayerId.PLAYER_ONE) {
+            if (player == enums.PlayerId.PLAYER) {
                 this._plrOneLife += HP_POTION_VALUE;
                 if (this._plrOneLife > HP_MAX_VALUE) {
                     this._plrOneLife = HP_MAX_VALUE;
                 }
                 this._plrOneLifeBar.Value = this._plrOneLife;
-            } else if (player == enums.PlayerId.PLAYER_TWO) {
+            } else if (player == enums.PlayerId.ENEMY) {
                 this._plrTwoLife += HP_POTION_VALUE;
                 if (this._plrTwoLife > HP_MAX_VALUE) {
                     this._plrTwoLife = HP_MAX_VALUE;
@@ -233,7 +233,7 @@ module managers {
         }
 
         public ChangePlayerStatus(player: enums.PlayerId, type: enums.StatusTypes, status: enums.PowerUpStatus) {
-            let statusBar = player == enums.PlayerId.PLAYER_ONE ? this._plrOneStatus : this._plrTwoStatus;
+            let statusBar = player == enums.PlayerId.PLAYER ? this._plrOneStatus : this._plrTwoStatus;
             let suffix = "";
 
             switch (status) {

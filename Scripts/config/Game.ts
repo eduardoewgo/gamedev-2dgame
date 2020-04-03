@@ -4,10 +4,13 @@ module config {
         public static SCREEN_WIDTH: number = 1280;
         public static SCREEN_HEIGHT: number = 720;
         public static GAME_BAR: managers.GameBar;
-        public static PLAYER1_CHARACTER: string;
-        public static PLAYER2_CHARACTER: string;
-        public static PLAYER1_STATUS: objects.PlayerStatus;
-        public static PLAYER2_STATUS: objects.PlayerStatus;
+
+        public static PLAYER_CHARACTER: string;
+        public static ENEMY_CHARACTER: string;
+
+        public static PLAYER_STATUS: objects.PlayerStatus;
+        public static ENEMY_STATUS: objects.PlayerStatus;
+
         public static WINNER: enums.PlayerId;
         public static SCENE: scenes.State;
         public static ASSETS: createjs.LoadQueue;

@@ -17,7 +17,7 @@ var objects;
     var Bullet = /** @class */ (function (_super) {
         __extends(Bullet, _super);
         function Bullet(startPosition, player) {
-            if (player === void 0) { player = enums.PlayerId.PLAYER_ONE; }
+            if (player === void 0) { player = enums.PlayerId.PLAYER; }
             var _this = 
             // from https://opengameart.org/content/bullets-game-asset
             //super(config.Game.ASSETS.getResult("attack1"));
@@ -50,7 +50,7 @@ var objects;
         });
         Bullet.prototype._checkBounds = function () { };
         Bullet.prototype.isOutOfBounds = function () {
-            if (this._player == enums.PlayerId.PLAYER_TWO) {
+            if (this._player == enums.PlayerId.ENEMY) {
                 return this.x > config.Game.SCREEN_WIDTH;
             }
             else {
@@ -59,7 +59,7 @@ var objects;
         };
         Bullet.prototype.Start = function () { };
         Bullet.prototype.Update = function () {
-            if (this._player == enums.PlayerId.PLAYER_TWO) {
+            if (this._player == enums.PlayerId.ENEMY) {
                 this.position.x -= this._bulletVel;
             }
             else {

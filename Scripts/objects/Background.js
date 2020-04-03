@@ -28,7 +28,7 @@ var objects;
             _this._halfWidth = 0;
             _this._halfHeight = 0;
             _this._position = new objects.Vector2(0, 0, _this);
-            _this._isCentered = false;
+            _this._isCentered = true;
             _this.width = _this.getBounds().width;
             _this.height = _this.getBounds().height;
             if (fourth != undefined) {
