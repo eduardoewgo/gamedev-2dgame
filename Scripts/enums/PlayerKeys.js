@@ -3,8 +3,8 @@ var enums;
 (function (enums) {
     var PlayerKeys;
     (function (PlayerKeys) {
-        PlayerKeys[PlayerKeys["MOVE_UP"] = 0] = "MOVE_UP";
-        PlayerKeys[PlayerKeys["MOVE_DOWN"] = 1] = "MOVE_DOWN";
+        PlayerKeys[PlayerKeys["MOVE_LEFT"] = 0] = "MOVE_LEFT";
+        PlayerKeys[PlayerKeys["MOVE_RIGHT"] = 1] = "MOVE_RIGHT";
         PlayerKeys[PlayerKeys["ROTATE_CC"] = 2] = "ROTATE_CC";
         PlayerKeys[PlayerKeys["ROTATE_CW"] = 3] = "ROTATE_CW";
         PlayerKeys[PlayerKeys["SHOOT"] = 4] = "SHOOT";

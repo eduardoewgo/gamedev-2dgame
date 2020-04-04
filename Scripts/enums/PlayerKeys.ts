@@ -1,7 +1,7 @@
 module enums {
     export enum PlayerKeys {
-        MOVE_UP,
-        MOVE_DOWN,
+        MOVE_LEFT,
+        MOVE_RIGHT,
         ROTATE_CC,
         ROTATE_CW,
         SHOOT,

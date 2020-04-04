@@ -2,8 +2,8 @@ module scenes {
     export class Play extends objects.Scene {
         // PRIVATE INSTANCE MEMBERS
         private _background: objects.Background;
-        private _player1: objects.Player;
-        private _player2: objects.Player;
+        private _player: objects.Player;
+        private _enemy: objects.Player;
         private _powerUp: Array<objects.PowerUp> = [];
         private _itemSpawnTicks: number;
         private _bullets: Array<objects.Bullet> = [];
@@ -46,8 +46,8 @@ module scenes {
             // Check for player two bullet collisions
             let bulletHit: boolean = false;
             if (e.Player == enums.PlayerId.ENEMY) {
-                if (managers.Collision.AABBCheck(this._player1, e)) {
-                    this._player1.Hit();
+                if (managers.Collision.AABBCheck(this._player, e)) {
+                    this._player.Hit();
                     this._gameBar.PostDamage(
                         enums.PlayerId.PLAYER,
                         config.Game.PLAYER_STATUS.CalculateDamage(
@@ -57,8 +57,8 @@ module scenes {
                     bulletHit = true;
                 }
             } else if (e.Player == enums.PlayerId.PLAYER) {
-                if (managers.Collision.AABBCheck(this._player2, e)) {
-                    this._player2.Hit();
+                if (managers.Collision.AABBCheck(this._enemy, e)) {
+                    this._enemy.Hit();
                     this._gameBar.PostDamage(
                         enums.PlayerId.ENEMY,
                         config.Game.ENEMY_STATUS.CalculateDamage(
@@ -136,13 +136,8 @@ module scenes {
             // Background
             this._background = new objects.Background(config.Game.ASSETS.getResult("forestBackground"));
             // Create the players
-            this._player1 = new objects.Player(enums.PlayerId.PLAYER, config.Game.PLAYER_CHARACTER);
-            this._player2 = new objects.Player(enums.PlayerId.ENEMY, config.Game.ENEMY_CHARACTER);
-
-            setInterval(() => {
-                // TODO: make this timer logic work somehow and check for item collision.
-                // this._powerUp = new objects.PowerUp();
-            }, 5000 || Math.random() * 100);
+            this._player = new objects.Player(enums.PlayerId.PLAYER, config.Game.PLAYER_CHARACTER);
+            this._enemy = new objects.Player(enums.PlayerId.ENEMY, config.Game.ENEMY_CHARACTER);
 
             this._powerUp = new Array<objects.PowerUp>();
 
@@ -164,15 +159,15 @@ module scenes {
         public Update(): void {
             // Do not allow player 1 to move if it is trapped
             if (config.Game.PLAYER_STATUS.GetPowerStatus(enums.StatusTypes.TRAP) == enums.PowerUpStatus.INACTIVE) {
-                this._player1.Update();
+                this._player.Update();
             }
             if (config.Game.ENEMY_STATUS.GetPowerStatus(enums.StatusTypes.TRAP) == enums.PowerUpStatus.INACTIVE) {
-                this._player2.Update();
+                this._enemy.Update();
             }
             this._gameBar.Update();
 
-            this._plrOneBulletTick = this._plrShoot(this._player1, config.Game.PLAYER_STATUS, this._plrOneBulletTick);
-            this._plrTwoBulletTick = this._plrShoot(this._player2, config.Game.ENEMY_STATUS, this._plrTwoBulletTick);
+            this._plrOneBulletTick = this._plrShoot(this._player, config.Game.PLAYER_STATUS, this._plrOneBulletTick);
+            this._plrTwoBulletTick = this._plrShoot(this._enemy, config.Game.ENEMY_STATUS, this._plrTwoBulletTick);
 
             config.Game.PLAYER_STATUS.Update();
             config.Game.ENEMY_STATUS.Update();
@@ -189,8 +184,8 @@ module scenes {
 
         public Main(): void {
             this.addChild(this._background);
-            this.addChild(this._player1);
-            this.addChild(this._player2);
+            this.addChild(this._player);
+            this.addChild(this._enemy);
             this._gameBar.ScreenObjects.forEach(obj => this.addChild(obj));
         }
     }

@@ -18,7 +18,7 @@ var objects;
         __extends(Player, _super);
         // CONSTRUCTOR
         function Player(playerId, playerCharacter) {
-            var _this = _super.call(this, config.Game.ATLAS, playerCharacter, 0, 0, true) || this;
+            var _this = _super.call(this, config.Game.ATLAS2, playerCharacter, 0, 0, true) || this;
             // PRIVATE INSTANCE MEMBERS
             _this._playerVel = 3;
             _this._playerId = playerId;
@@ -49,19 +49,18 @@ var objects;
             var velocity = new objects.Vector2(0, 0);
             var playerKeys = managers.Keyboard.GetPlayerKeys(this._playerId);
             // Verify the direction and set the y speed
-            if (playerKeys[enums.PlayerKeys.MOVE_UP] && !playerKeys[enums.PlayerKeys.MOVE_DOWN]) {
+            if (playerKeys[enums.PlayerKeys.MOVE_LEFT] && !playerKeys[enums.PlayerKeys.MOVE_RIGHT]) {
                 velocity = new objects.Vector2(-this._playerVel, 0);
             }
-            else if (playerKeys[enums.PlayerKeys.MOVE_DOWN] && !playerKeys[enums.PlayerKeys.MOVE_UP]) {
+            else if (playerKeys[enums.PlayerKeys.MOVE_RIGHT] && !playerKeys[enums.PlayerKeys.MOVE_LEFT]) {
                 velocity = new objects.Vector2(this._playerVel, 0);
             }
             this.position = objects.Vector2.add(this.position, velocity);
         };
         Player.prototype.Attack = function () {
-            var _this = this;
             // Attack position for 250ms then go back
-            this.gotoAndStop(this._playerCharacter + "Attack");
-            setTimeout(function () { return _this.gotoAndStop("" + _this._playerCharacter); }, 250);
+            this.gotoAndStop("Player/Mage/Attack/attack");
+            // setTimeout(() => this.gotoAndStop(`${this._playerCharacter}`), 250);
         };
         Player.prototype.Hit = function () {
             var _this = this;

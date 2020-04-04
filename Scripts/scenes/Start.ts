@@ -89,10 +89,10 @@ module scenes {
             this._p1MageButton.on("click", () => {
                 this._p1RogueButton.SetInactive();
                 this._p1MageButton.SetActive();
-                config.Game.PLAYER_CHARACTER = constants.PlayerType.MAGE;
+                config.Game.PLAYER_CHARACTER = constants.PlayerType.MAGE_IDLE;
                 config.Game.PLAYER_STATUS = objects.PlayerStatus.GetPlayerStatus(
                     enums.PlayerId.PLAYER,
-                    constants.PlayerType.MAGE
+                    constants.PlayerType.MAGE_IDLE
                 );
                 setEnemy();
                 this.validateGame();
@@ -100,10 +100,10 @@ module scenes {
             this._p1RogueButton.on("click", () => {
                 this._p1RogueButton.SetActive();
                 this._p1MageButton.SetInactive();
-                config.Game.PLAYER_CHARACTER = constants.PlayerType.ROGUE;
+                config.Game.PLAYER_CHARACTER = constants.PlayerType.ROGUE_IDLE;
                 config.Game.PLAYER_STATUS = objects.PlayerStatus.GetPlayerStatus(
                     enums.PlayerId.PLAYER,
-                    constants.PlayerType.ROGUE
+                    constants.PlayerType.ROGUE_IDLE
                 );
 
                 setEnemy();
@@ -111,10 +111,10 @@ module scenes {
             });
 
             const setEnemy = () => {
-                config.Game.ENEMY_CHARACTER = constants.PlayerType.MAGE;
+                config.Game.ENEMY_CHARACTER = constants.PlayerType.MAGE_IDLE;
                 config.Game.ENEMY_STATUS = objects.PlayerStatus.GetPlayerStatus(
                     enums.PlayerId.ENEMY,
-                    constants.PlayerType.MAGE
+                    constants.PlayerType.MAGE_IDLE
                 );
             };
 

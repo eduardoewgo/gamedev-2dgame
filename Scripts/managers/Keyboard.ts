@@ -8,11 +8,11 @@ module managers {
         private static onKeyDown(event: KeyboardEvent): void {
             switch (event.keyCode) {
                 case config.Settings.KeyPlayerLeft:
-                    this._keyStatus[enums.PlayerId.PLAYER][enums.PlayerKeys.MOVE_UP] = true;
+                    this._keyStatus[enums.PlayerId.PLAYER][enums.PlayerKeys.MOVE_LEFT] = true;
                     break;
 
                 case config.Settings.KeyPlayerRight:
-                    this._keyStatus[enums.PlayerId.PLAYER][enums.PlayerKeys.MOVE_DOWN] = true;
+                    this._keyStatus[enums.PlayerId.PLAYER][enums.PlayerKeys.MOVE_RIGHT] = true;
                     break;
 
                 case config.Settings.KeyPlayerOneCCW:
@@ -32,11 +32,11 @@ module managers {
         private static onKeyUp(event: KeyboardEvent): void {
             switch (event.keyCode) {
                 case config.Settings.KeyPlayerLeft:
-                    this._keyStatus[enums.PlayerId.PLAYER][enums.PlayerKeys.MOVE_UP] = false;
+                    this._keyStatus[enums.PlayerId.PLAYER][enums.PlayerKeys.MOVE_LEFT] = false;
                     break;
 
                 case config.Settings.KeyPlayerRight:
-                    this._keyStatus[enums.PlayerId.PLAYER][enums.PlayerKeys.MOVE_DOWN] = false;
+                    this._keyStatus[enums.PlayerId.PLAYER][enums.PlayerKeys.MOVE_RIGHT] = false;
                     break;
 
                 case config.Settings.KeyPlayerOneCCW:

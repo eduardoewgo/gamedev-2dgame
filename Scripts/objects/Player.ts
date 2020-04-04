@@ -12,7 +12,7 @@ module objects {
 
         // CONSTRUCTOR
         constructor(playerId: enums.PlayerId, playerCharacter: string) {
-            super(config.Game.ATLAS, playerCharacter, 0, 0, true);
+            super(config.Game.ATLAS2, playerCharacter, 0, 0, true);
             this._playerId = playerId;
             this._playerCharacter = playerCharacter;
             this.Reset();
@@ -34,9 +34,9 @@ module objects {
             let playerKeys = managers.Keyboard.GetPlayerKeys(this._playerId);
 
             // Verify the direction and set the y speed
-            if (playerKeys[enums.PlayerKeys.MOVE_UP] && !playerKeys[enums.PlayerKeys.MOVE_DOWN]) {
+            if (playerKeys[enums.PlayerKeys.MOVE_LEFT] && !playerKeys[enums.PlayerKeys.MOVE_RIGHT]) {
                 velocity = new Vector2(-this._playerVel, 0);
-            } else if (playerKeys[enums.PlayerKeys.MOVE_DOWN] && !playerKeys[enums.PlayerKeys.MOVE_UP]) {
+            } else if (playerKeys[enums.PlayerKeys.MOVE_RIGHT] && !playerKeys[enums.PlayerKeys.MOVE_LEFT]) {
                 velocity = new Vector2(this._playerVel, 0);
             }
 
@@ -45,8 +45,8 @@ module objects {
 
         public Attack() {
             // Attack position for 250ms then go back
-            this.gotoAndStop(`${this._playerCharacter}Attack`);
-            setTimeout(() => this.gotoAndStop(`${this._playerCharacter}`), 250);
+            this.gotoAndStop(`Player/Mage/Attack/attack`);
+            // setTimeout(() => this.gotoAndStop(`${this._playerCharacter}`), 250);
         }
 
         public Hit() {

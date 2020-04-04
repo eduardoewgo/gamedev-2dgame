@@ -58,22 +58,22 @@ var scenes;
             this._p1MageButton.on("click", function () {
                 _this._p1RogueButton.SetInactive();
                 _this._p1MageButton.SetActive();
-                config.Game.PLAYER_CHARACTER = constants.PlayerType.MAGE;
-                config.Game.PLAYER_STATUS = objects.PlayerStatus.GetPlayerStatus(enums.PlayerId.PLAYER, constants.PlayerType.MAGE);
+                config.Game.PLAYER_CHARACTER = constants.PlayerType.MAGE_IDLE;
+                config.Game.PLAYER_STATUS = objects.PlayerStatus.GetPlayerStatus(enums.PlayerId.PLAYER, constants.PlayerType.MAGE_IDLE);
                 setEnemy();
                 _this.validateGame();
             });
             this._p1RogueButton.on("click", function () {
                 _this._p1RogueButton.SetActive();
                 _this._p1MageButton.SetInactive();
-                config.Game.PLAYER_CHARACTER = constants.PlayerType.ROGUE;
-                config.Game.PLAYER_STATUS = objects.PlayerStatus.GetPlayerStatus(enums.PlayerId.PLAYER, constants.PlayerType.ROGUE);
+                config.Game.PLAYER_CHARACTER = constants.PlayerType.ROGUE_IDLE;
+                config.Game.PLAYER_STATUS = objects.PlayerStatus.GetPlayerStatus(enums.PlayerId.PLAYER, constants.PlayerType.ROGUE_IDLE);
                 setEnemy();
                 _this.validateGame();
             });
             var setEnemy = function () {
-                config.Game.ENEMY_CHARACTER = constants.PlayerType.MAGE;
-                config.Game.ENEMY_STATUS = objects.PlayerStatus.GetPlayerStatus(enums.PlayerId.ENEMY, constants.PlayerType.MAGE);
+                config.Game.ENEMY_CHARACTER = constants.PlayerType.MAGE_IDLE;
+                config.Game.ENEMY_STATUS = objects.PlayerStatus.GetPlayerStatus(enums.PlayerId.ENEMY, constants.PlayerType.MAGE_IDLE);
             };
             // Call this once here to "initialize" as inactive
             this.validateGame();

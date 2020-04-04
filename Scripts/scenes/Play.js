@@ -52,15 +52,15 @@ var scenes;
             // Check for player two bullet collisions
             var bulletHit = false;
             if (e.Player == enums.PlayerId.ENEMY) {
-                if (managers.Collision.AABBCheck(this._player1, e)) {
-                    this._player1.Hit();
+                if (managers.Collision.AABBCheck(this._player, e)) {
+                    this._player.Hit();
                     this._gameBar.PostDamage(enums.PlayerId.PLAYER, config.Game.PLAYER_STATUS.CalculateDamage(config.Game.ENEMY_STATUS.GetValue(enums.StatusTypes.ATK_POWER)));
                     bulletHit = true;
                 }
             }
             else if (e.Player == enums.PlayerId.PLAYER) {
-                if (managers.Collision.AABBCheck(this._player2, e)) {
-                    this._player2.Hit();
+                if (managers.Collision.AABBCheck(this._enemy, e)) {
+                    this._enemy.Hit();
                     this._gameBar.PostDamage(enums.PlayerId.ENEMY, config.Game.ENEMY_STATUS.CalculateDamage(config.Game.PLAYER_STATUS.GetValue(enums.StatusTypes.ATK_POWER)));
                     bulletHit = true;
                 }
@@ -124,12 +124,8 @@ var scenes;
             // Background
             this._background = new objects.Background(config.Game.ASSETS.getResult("forestBackground"));
             // Create the players
-            this._player1 = new objects.Player(enums.PlayerId.PLAYER, config.Game.PLAYER_CHARACTER);
-            this._player2 = new objects.Player(enums.PlayerId.ENEMY, config.Game.ENEMY_CHARACTER);
-            setInterval(function () {
-                // TODO: make this timer logic work somehow and check for item collision.
-                // this._powerUp = new objects.PowerUp();
-            }, 5000 || Math.random() * 100);
+            this._player = new objects.Player(enums.PlayerId.PLAYER, config.Game.PLAYER_CHARACTER);
+            this._enemy = new objects.Player(enums.PlayerId.ENEMY, config.Game.ENEMY_CHARACTER);
             this._powerUp = new Array();
             // Create the GamaBar
             this._gameBar = new managers.GameBar();
@@ -145,14 +141,14 @@ var scenes;
             var _this = this;
             // Do not allow player 1 to move if it is trapped
             if (config.Game.PLAYER_STATUS.GetPowerStatus(enums.StatusTypes.TRAP) == enums.PowerUpStatus.INACTIVE) {
-                this._player1.Update();
+                this._player.Update();
             }
             if (config.Game.ENEMY_STATUS.GetPowerStatus(enums.StatusTypes.TRAP) == enums.PowerUpStatus.INACTIVE) {
-                this._player2.Update();
+                this._enemy.Update();
             }
             this._gameBar.Update();
-            this._plrOneBulletTick = this._plrShoot(this._player1, config.Game.PLAYER_STATUS, this._plrOneBulletTick);
-            this._plrTwoBulletTick = this._plrShoot(this._player2, config.Game.ENEMY_STATUS, this._plrTwoBulletTick);
+            this._plrOneBulletTick = this._plrShoot(this._player, config.Game.PLAYER_STATUS, this._plrOneBulletTick);
+            this._plrTwoBulletTick = this._plrShoot(this._enemy, config.Game.ENEMY_STATUS, this._plrTwoBulletTick);
             config.Game.PLAYER_STATUS.Update();
             config.Game.ENEMY_STATUS.Update();
             this._bullets.forEach(function (e, index) {
@@ -165,8 +161,8 @@ var scenes;
         Play.prototype.Main = function () {
             var _this = this;
             this.addChild(this._background);
-            this.addChild(this._player1);
-            this.addChild(this._player2);
+            this.addChild(this._player);
+            this.addChild(this._enemy);
             this._gameBar.ScreenObjects.forEach(function (obj) { return _this.addChild(obj); });
         };
         return Play;

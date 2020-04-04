@@ -170,7 +170,7 @@ var objects;
         };
         PlayerStatus.GetPlayerStatus = function (plrId, plrClass) {
             var iniAS, incAS, iniAP, incAP, iniAr, incAr;
-            if (plrClass == constants.PlayerType.MAGE) {
+            if (plrClass == constants.PlayerType.MAGE_IDLE) {
                 iniAS = 120;
                 incAS = 10;
                 iniAP = 20;
@@ -178,7 +178,7 @@ var objects;
                 iniAr = 6;
                 incAr = 1;
             }
-            else if (plrClass == constants.PlayerType.ROGUE) {
+            else if (plrClass == constants.PlayerType.ROGUE_IDLE) {
                 iniAS = 80;
                 incAS = 8;
                 iniAP = 12;

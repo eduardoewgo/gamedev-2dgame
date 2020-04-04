@@ -8,10 +8,10 @@ var managers;
         Keyboard.onKeyDown = function (event) {
             switch (event.keyCode) {
                 case config.Settings.KeyPlayerLeft:
-                    this._keyStatus[enums.PlayerId.PLAYER][enums.PlayerKeys.MOVE_UP] = true;
+                    this._keyStatus[enums.PlayerId.PLAYER][enums.PlayerKeys.MOVE_LEFT] = true;
                     break;
                 case config.Settings.KeyPlayerRight:
-                    this._keyStatus[enums.PlayerId.PLAYER][enums.PlayerKeys.MOVE_DOWN] = true;
+                    this._keyStatus[enums.PlayerId.PLAYER][enums.PlayerKeys.MOVE_RIGHT] = true;
                     break;
                 case config.Settings.KeyPlayerOneCCW:
                     this._keyStatus[enums.PlayerId.PLAYER][enums.PlayerKeys.ROTATE_CC] = true;
@@ -27,10 +27,10 @@ var managers;
         Keyboard.onKeyUp = function (event) {
             switch (event.keyCode) {
                 case config.Settings.KeyPlayerLeft:
-                    this._keyStatus[enums.PlayerId.PLAYER][enums.PlayerKeys.MOVE_UP] = false;
+                    this._keyStatus[enums.PlayerId.PLAYER][enums.PlayerKeys.MOVE_LEFT] = false;
                     break;
                 case config.Settings.KeyPlayerRight:
-                    this._keyStatus[enums.PlayerId.PLAYER][enums.PlayerKeys.MOVE_DOWN] = false;
+                    this._keyStatus[enums.PlayerId.PLAYER][enums.PlayerKeys.MOVE_RIGHT] = false;
                     break;
                 case config.Settings.KeyPlayerOneCCW:
                     this._keyStatus[enums.PlayerId.PLAYER][enums.PlayerKeys.ROTATE_CC] = false;
