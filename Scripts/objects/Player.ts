@@ -11,7 +11,7 @@ module objects {
         }
 
         // CONSTRUCTOR
-        constructor(playerId: enums.PlayerId, playerCharacter: string) {
+        constructor(playerId: enums.PlayerId, playerCharacter: string, x?: number, y?: number) {
             super(config.Game.ATLAS2, playerCharacter, 0, 0, true);
             this._playerId = playerId;
             this._playerCharacter = playerCharacter;
@@ -67,17 +67,14 @@ module objects {
 
         public Reset(): void {
             if (this._playerId == enums.PlayerId.ENEMY) {
-                // Mirror the second player by default
-                this.scaleX = -1;
-
                 this.position = new Vector2(
                     config.Game.SCREEN_WIDTH - config.Game.SCREEN_SAFE_AREA,
-                    config.Game.SCREEN_HEIGHT - config.Game.SCREEN_SAFE_AREA
+                    config.Game.SCREEN_HEIGHT - 8
                 );
             } else {
                 this.position = new Vector2(
                     config.Game.SCREEN_SAFE_AREA,
-                    config.Game.SCREEN_HEIGHT - config.Game.SCREEN_SAFE_AREA
+                    config.Game.SCREEN_HEIGHT - 8
                 );
             }
         }

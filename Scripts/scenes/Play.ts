@@ -178,8 +178,6 @@ module scenes {
                 if (e.Player == enums.PlayerId.PLAYER) {
                 }
             });
-
-            this._createPowerUp();
         }
 
         public Main(): void {
@@ -187,6 +185,14 @@ module scenes {
             this.addChild(this._player);
             this.addChild(this._enemy);
             this._gameBar.ScreenObjects.forEach(obj => this.addChild(obj));
+
+            for (let i = 0, width = 0; width <= config.Game.SCREEN_WIDTH; i++) {
+                let floor = new createjs.Sprite(config.Game.ATLAS2, "Background/tile");
+                width = i * 30;
+                floor.x = i * 30;
+                floor.y = config.Game.SCREEN_HEIGHT - 18;
+                this.addChild(floor);
+            }
         }
     }
 }

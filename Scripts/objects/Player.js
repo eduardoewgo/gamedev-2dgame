@@ -17,7 +17,7 @@ var objects;
     var Player = /** @class */ (function (_super) {
         __extends(Player, _super);
         // CONSTRUCTOR
-        function Player(playerId, playerCharacter) {
+        function Player(playerId, playerCharacter, x, y) {
             var _this = _super.call(this, config.Game.ATLAS2, playerCharacter, 0, 0, true) || this;
             // PRIVATE INSTANCE MEMBERS
             _this._playerVel = 3;
@@ -78,12 +78,10 @@ var objects;
         };
         Player.prototype.Reset = function () {
             if (this._playerId == enums.PlayerId.ENEMY) {
-                // Mirror the second player by default
-                this.scaleX = -1;
-                this.position = new objects.Vector2(config.Game.SCREEN_WIDTH - config.Game.SCREEN_SAFE_AREA, config.Game.SCREEN_HEIGHT - config.Game.SCREEN_SAFE_AREA);
+                this.position = new objects.Vector2(config.Game.SCREEN_WIDTH - config.Game.SCREEN_SAFE_AREA, config.Game.SCREEN_HEIGHT - 8);
             }
             else {
-                this.position = new objects.Vector2(config.Game.SCREEN_SAFE_AREA, config.Game.SCREEN_HEIGHT - config.Game.SCREEN_SAFE_AREA);
+                this.position = new objects.Vector2(config.Game.SCREEN_SAFE_AREA, config.Game.SCREEN_HEIGHT - 8);
             }
         };
         return Player;

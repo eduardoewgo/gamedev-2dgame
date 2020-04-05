@@ -72,23 +72,11 @@ var scenes;
                 _this.validateGame();
             });
             var setEnemy = function () {
-                config.Game.ENEMY_CHARACTER = constants.PlayerType.MAGE_IDLE;
-                config.Game.ENEMY_STATUS = objects.PlayerStatus.GetPlayerStatus(enums.PlayerId.ENEMY, constants.PlayerType.MAGE_IDLE);
+                config.Game.ENEMY_CHARACTER = constants.PlayerType.DEMON_IDLE;
+                config.Game.ENEMY_STATUS = objects.PlayerStatus.GetPlayerStatus(enums.PlayerId.ENEMY, constants.PlayerType.DEMON_IDLE);
             };
             // Call this once here to "initialize" as inactive
             this.validateGame();
-            // TODO: use this to create the tiles
-            // for (let i = 0; i < 5; i++) {
-            //     let floor = new createjs.Sprite(config.Game.ASSETS.getResult("sheet1") as any, "tile");
-            //     floor.x = i * 31;
-            //     floor.y = config.Game.SCREEN_HEIGHT - config.Game.SCREEN_SAFE_AREA;
-            //     this.addChild(floor);
-            // }
-            //
-            // let demon = new createjs.Sprite(config.Game.ASSETS.getResult("sheet1") as any, "demon-idle");
-            // demon.x = config.Game.SCREEN_SAFE_AREA;
-            // demon.y = config.Game.SCREEN_HEIGHT - config.Game.SCREEN_SAFE_AREA;
-            // this.addChild(demon);
         };
         Start.prototype.validateGame = function () {
             if (config.Game.PLAYER_CHARACTER != null && config.Game.ENEMY_CHARACTER != null) {

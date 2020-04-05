@@ -156,7 +156,6 @@ var scenes;
                 if (e.Player == enums.PlayerId.PLAYER) {
                 }
             });
-            this._createPowerUp();
         };
         Play.prototype.Main = function () {
             var _this = this;
@@ -164,6 +163,13 @@ var scenes;
             this.addChild(this._player);
             this.addChild(this._enemy);
             this._gameBar.ScreenObjects.forEach(function (obj) { return _this.addChild(obj); });
+            for (var i = 0, width = 0; width <= config.Game.SCREEN_WIDTH; i++) {
+                var floor = new createjs.Sprite(config.Game.ATLAS2, "Background/tile");
+                width = i * 30;
+                floor.x = i * 30;
+                floor.y = config.Game.SCREEN_HEIGHT - 18;
+                this.addChild(floor);
+            }
         };
         return Play;
     }(objects.Scene));
