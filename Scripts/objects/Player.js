@@ -59,14 +59,13 @@ var objects;
         };
         Player.prototype.Attack = function () {
             // Attack position for 250ms then go back
-            this.gotoAndStop("Player/Mage/Attack/attack");
+            // this.gotoAndStop(`Player/Mage/Attack/attack`);
             // setTimeout(() => this.gotoAndStop(`${this._playerCharacter}`), 250);
         };
         Player.prototype.Hit = function () {
-            var _this = this;
             // Attack position for 250ms then go back.
-            this.gotoAndStop(this._playerCharacter + "Hit");
-            setTimeout(function () { return _this.gotoAndStop("" + _this._playerCharacter); }, 250);
+            // this.gotoAndStop(`${this._playerCharacter}Hit`);
+            // setTimeout(() => this.gotoAndStop(`${this._playerCharacter}`), 250);
         };
         // PUBLIC METHODS
         Player.prototype.Start = function () {
@@ -78,7 +77,7 @@ var objects;
         };
         Player.prototype.Reset = function () {
             if (this._playerId == enums.PlayerId.ENEMY) {
-                this.position = new objects.Vector2(config.Game.SCREEN_WIDTH - config.Game.SCREEN_SAFE_AREA, config.Game.SCREEN_HEIGHT - 8);
+                this.position = new objects.Vector2(config.Game.SCREEN_WIDTH - config.Game.SCREEN_SAFE_AREA, config.Game.SCREEN_HEIGHT - 350);
             }
             else {
                 this.position = new objects.Vector2(config.Game.SCREEN_SAFE_AREA, config.Game.SCREEN_HEIGHT - 8);

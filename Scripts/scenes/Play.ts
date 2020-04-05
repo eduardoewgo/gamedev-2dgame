@@ -8,8 +8,8 @@ module scenes {
         private _itemSpawnTicks: number;
         private _bullets: Array<objects.Bullet> = [];
         private _gameBar: managers.GameBar;
-        private _plrOneBulletTick: number;
-        private _plrTwoBulletTick: number;
+        private _playerTick: number;
+        private _enemyTick: number;
 
         constructor() {
             super();
@@ -24,7 +24,11 @@ module scenes {
                 let curTick = createjs.Ticker.getTicks();
                 if (curTick - bulletTick >= status.GetValue(enums.StatusTypes.ATK_SPEED)) {
                     player.Attack();
-                    let bullet = new objects.Bullet(player.position, player.PlayerId);
+                    let bullet = new objects.Bullet(
+                        player.position,
+                        player.PlayerId,
+                        player.PlayerId == enums.PlayerId.ENEMY ? "Attack/energy-ball" : "Attack/linear-fire"
+                    );
                     this._bullets.push(bullet);
                     this.addChild(bullet);
                     return curTick;
@@ -148,8 +152,8 @@ module scenes {
             // Initialize the keyboard
             managers.Keyboard.Start();
 
-            this._plrOneBulletTick = 0;
-            this._plrTwoBulletTick = 0;
+            this._playerTick = 0;
+            this._enemyTick = 0;
 
             this._itemSpawnTicks = config.Game.INITIAL_ITEM_SPAWN_TICKER;
 
@@ -166,8 +170,8 @@ module scenes {
             }
             this._gameBar.Update();
 
-            this._plrOneBulletTick = this._plrShoot(this._player, config.Game.PLAYER_STATUS, this._plrOneBulletTick);
-            this._plrTwoBulletTick = this._plrShoot(this._enemy, config.Game.ENEMY_STATUS, this._plrTwoBulletTick);
+            this._playerTick = this._plrShoot(this._player, config.Game.PLAYER_STATUS, this._playerTick);
+            this._enemyTick = this._plrShoot(this._enemy, config.Game.ENEMY_STATUS, this._enemyTick);
 
             config.Game.PLAYER_STATUS.Update();
             config.Game.ENEMY_STATUS.Update();

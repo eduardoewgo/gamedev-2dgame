@@ -45,14 +45,14 @@ module objects {
 
         public Attack() {
             // Attack position for 250ms then go back
-            this.gotoAndStop(`Player/Mage/Attack/attack`);
+            // this.gotoAndStop(`Player/Mage/Attack/attack`);
             // setTimeout(() => this.gotoAndStop(`${this._playerCharacter}`), 250);
         }
 
         public Hit() {
             // Attack position for 250ms then go back.
-            this.gotoAndStop(`${this._playerCharacter}Hit`);
-            setTimeout(() => this.gotoAndStop(`${this._playerCharacter}`), 250);
+            // this.gotoAndStop(`${this._playerCharacter}Hit`);
+            // setTimeout(() => this.gotoAndStop(`${this._playerCharacter}`), 250);
         }
 
         // PUBLIC METHODS
@@ -69,7 +69,7 @@ module objects {
             if (this._playerId == enums.PlayerId.ENEMY) {
                 this.position = new Vector2(
                     config.Game.SCREEN_WIDTH - config.Game.SCREEN_SAFE_AREA,
-                    config.Game.SCREEN_HEIGHT - 8
+                    config.Game.SCREEN_HEIGHT - 350
                 );
             } else {
                 this.position = new Vector2(

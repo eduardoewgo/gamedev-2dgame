@@ -16,27 +16,35 @@ module objects {
         public get Value(): number {
             return this._value;
         }
+
         public set Value(value: number) {
             this._value = value;
         }
+
         public get Increment(): number {
             return this._increment;
         }
+
         public get Tick(): number {
             return this._tick;
         }
+
         public set Tick(value: number) {
             this._tick = value;
         }
+
         public get Status(): enums.PowerUpStatus {
             return this._status;
         }
+
         public set Status(value: enums.PowerUpStatus) {
             this._status = value;
         }
+
         public get PowerMultiplier(): number {
             return this._powerMultiplier;
         }
+
         public get PowerDuration(): number {
             return this._powerDuration;
         }
@@ -61,6 +69,7 @@ module objects {
         public get Level(): number {
             return this._level;
         }
+
         public get PlayerId(): enums.PlayerId {
             return this._playerId;
         }
@@ -200,20 +209,13 @@ module objects {
                 incAP = 2;
                 iniAr = 10;
                 incAr = 1;
-            } else if (plrClass == constants.PlayerType.WARRIOR) {
+            } else if (plrClass == constants.PlayerType.DEMON_IDLE) {
                 iniAS = 90;
                 incAS = 5;
                 iniAP = 15;
                 incAP = 2;
                 iniAr = 12;
                 incAr = 2;
-            } else if (plrClass == constants.PlayerType.ARCHER) {
-                iniAS = 60;
-                incAS = 5;
-                iniAP = 10;
-                incAP = 2;
-                iniAr = 8;
-                incAr = 1;
             }
             return new objects.PlayerStatus(plrId, iniAS, incAS, iniAP, incAP, iniAr, incAr);
         }

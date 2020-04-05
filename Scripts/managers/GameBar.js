@@ -25,20 +25,13 @@ var managers;
                 enums.PowerUpTypes.TRAP
             ];
             this._plrOneLife = 100;
-            this._plrTwoLife = 100;
             this._plrOneXp = 0;
-            this._plrTwoXp = 0;
             this._gameStart = new Date().getTime();
             this._plrOneLifeBar = new objects.GraphicBar(BARS_POS_X_P1, HB_POS_Y, BARS_WIDTH, HB_HEIGHT, objects.GameBarType.HEALTH);
             this._plrOneHeartIcon = new objects.Image("heart", BARS_POS_X_P1 + BARS_WIDTH + 10, HB_POS_Y);
             this._plrOneXpBar = new objects.GraphicBar(BARS_POS_X_P1, XPB_POS_Y, BARS_WIDTH, XPB_HEIGHT, objects.GameBarType.EXPERIENCE);
             this._plrOneStatus = this._createStatusBarImages(BARS_POS_X_P1, STATUS_POS_Y, 25);
             this._plrOneLevelLabel = new objects.Label("LVL 1", "bold 16px", "Consolas", "#021775", BARS_POS_X_P1 + BARS_WIDTH + 10, XPB_POS_Y);
-            this._plrTwoLifeBar = new objects.GraphicBar(BARS_POS_X_P2, HB_POS_Y, BARS_WIDTH, HB_HEIGHT, objects.GameBarType.HEALTH, true);
-            this._plrTwoHeartIcon = new objects.Image("heart", BARS_POS_X_P2 - 30, HB_POS_Y);
-            this._plrTwoXpBar = new objects.GraphicBar(BARS_POS_X_P2, XPB_POS_Y, BARS_WIDTH, XPB_HEIGHT, objects.GameBarType.EXPERIENCE, true);
-            this._plrTwoLevelLabel = new objects.Label("LVL 1", "bold 16px", "Consolas", "#021775", BARS_POS_X_P2 - 55, XPB_POS_Y);
-            this._plrTwoStatus = this._createStatusBarImages(BARS_POS_X_P2 + BARS_WIDTH - 14, STATUS_POS_Y, -25);
             this._timerLabel = new objects.Label("000:00", "48px", "Consolas", "#000000", 640, 40, true);
         }
         Object.defineProperty(GameBar.prototype, "ScreenObjects", {
@@ -50,13 +43,8 @@ var managers;
                     this._plrOneXpBar,
                     this._plrOneLevelLabel,
                     this._plrOneHeartIcon,
-                    this._plrTwoLifeBar,
-                    this._plrTwoXpBar,
-                    this._plrTwoHeartIcon,
-                    this._plrTwoLevelLabel
                 ];
                 this._plrOneStatus.forEach(function (i) { return result.push(i); });
-                this._plrTwoStatus.forEach(function (i) { return result.push(i); });
                 return result;
             },
             enumerable: true,
@@ -97,14 +85,6 @@ var managers;
                     config.Game.WINNER = enums.PlayerId.ENEMY;
                 }
             }
-            else {
-                this._plrTwoLife -= damage;
-                this._plrTwoLifeBar.Value = this._plrTwoLife;
-                if (this._plrTwoLife <= 0) {
-                    config.Game.SCENE = scenes.State.END;
-                    config.Game.WINNER = enums.PlayerId.PLAYER;
-                }
-            }
         };
         GameBar.prototype.ReceiveExperience = function (player) {
             if (player == enums.PlayerId.PLAYER) {
@@ -126,15 +106,6 @@ var managers;
                 var posXpLvl = config.Game.ENEMY_STATUS.Level;
                 if (posXpLvl < constants.MAX_LEVEL) {
                     posXpLvl--;
-                    this._plrTwoXp += XP_POTION_VALUE;
-                    if (this._plrTwoXp >= XP_PER_LEVEL[posXpLvl]) {
-                        config.Game.ENEMY_STATUS.LevelUp();
-                        this._plrTwoLevelLabel.setText("LVL " + config.Game.ENEMY_STATUS.Level);
-                        if (config.Game.ENEMY_STATUS.Level < constants.MAX_LEVEL) {
-                            this._plrTwoXp = 0;
-                        }
-                    }
-                    this._plrTwoXpBar.Value = (100 * this._plrTwoXp) / XP_PER_LEVEL[posXpLvl];
                 }
             }
         };
@@ -146,16 +117,9 @@ var managers;
                 }
                 this._plrOneLifeBar.Value = this._plrOneLife;
             }
-            else if (player == enums.PlayerId.ENEMY) {
-                this._plrTwoLife += HP_POTION_VALUE;
-                if (this._plrTwoLife > HP_MAX_VALUE) {
-                    this._plrTwoLife = HP_MAX_VALUE;
-                }
-                this._plrTwoLifeBar.Value = this._plrTwoLife;
-            }
         };
         GameBar.prototype.ChangePlayerStatus = function (player, type, status) {
-            var statusBar = player == enums.PlayerId.PLAYER ? this._plrOneStatus : this._plrTwoStatus;
+            var statusBar = this._plrOneStatus;
             var suffix = "";
             switch (status) {
                 case enums.PowerUpStatus.INACTIVE:

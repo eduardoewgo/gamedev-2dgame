@@ -16,39 +16,30 @@ var objects;
 (function (objects) {
     var Bullet = /** @class */ (function (_super) {
         __extends(Bullet, _super);
-        function Bullet(startPosition, player) {
+        function Bullet(startPosition, player, attackSprite) {
             if (player === void 0) { player = enums.PlayerId.PLAYER; }
-            var _this = 
-            // from https://opengameart.org/content/bullets-game-asset
-            //super(config.Game.ASSETS.getResult("attack1"));
-            _super.call(this, config.Game.ATLAS2, "Attack/linear-fire") || this;
-            _this._bulletVel = 1;
-            _this.position = new objects.Vector2(startPosition.x, startPosition.y, _this);
-            //this.x = startPosition.x;
-            //this.y = startPosition.y;
+            var _this = _super.call(this, config.Game.ATLAS2, attackSprite) || this;
+            _this._bulletVel = 5;
+            if (player == enums.PlayerId.ENEMY) {
+                // Make it rainnnn!
+                _this.position = new objects.Vector2(Math.floor(Math.random() * config.Game.SCREEN_WIDTH), config.Game.GAME_BAR_HEIGHT, _this);
+                _this.rotation = 90;
+            }
+            else {
+                _this.position = new objects.Vector2(startPosition.x, startPosition.y - 50, _this);
+            }
             _this._player = player;
             return _this;
-            //this._active = true;
         }
         Object.defineProperty(Bullet.prototype, "Player", {
-            //private _active:boolean;
-            // PUBLIC PROPERTIES
-            // get active():boolean
-            // {
-            //     return this._active;
-            // }
-            // set active(value:boolean)
-            // {
-            //     this._active = value;
-            // }
-            // constuctor
             get: function () {
                 return this._player;
             },
             enumerable: true,
             configurable: true
         });
-        Bullet.prototype._checkBounds = function () { };
+        Bullet.prototype._checkBounds = function () {
+        };
         Bullet.prototype.isOutOfBounds = function () {
             if (this._player == enums.PlayerId.ENEMY) {
                 return this.x > config.Game.SCREEN_WIDTH;
@@ -57,16 +48,18 @@ var objects;
                 return this.x < 0;
             }
         };
-        Bullet.prototype.Start = function () { };
+        Bullet.prototype.Start = function () {
+        };
         Bullet.prototype.Update = function () {
             if (this._player == enums.PlayerId.ENEMY) {
-                this.position.x -= this._bulletVel;
+                this.position.y += this._bulletVel;
             }
             else {
                 this.position.x += this._bulletVel;
             }
         };
-        Bullet.prototype.Reset = function () { };
+        Bullet.prototype.Reset = function () {
+        };
         return Bullet;
     }(objects.GameObject));
     objects.Bullet = Bullet;

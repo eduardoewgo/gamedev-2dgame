@@ -186,21 +186,13 @@ var objects;
                 iniAr = 10;
                 incAr = 1;
             }
-            else if (plrClass == constants.PlayerType.WARRIOR) {
+            else if (plrClass == constants.PlayerType.DEMON_IDLE) {
                 iniAS = 90;
                 incAS = 5;
                 iniAP = 15;
                 incAP = 2;
                 iniAr = 12;
                 incAr = 2;
-            }
-            else if (plrClass == constants.PlayerType.ARCHER) {
-                iniAS = 60;
-                incAS = 5;
-                iniAP = 10;
-                incAP = 2;
-                iniAr = 8;
-                incAr = 1;
             }
             return new objects.PlayerStatus(plrId, iniAS, incAS, iniAP, incAP, iniAr, incAr);
         };

@@ -1,35 +1,33 @@
 module objects {
     export class Bullet extends objects.GameObject {
-        private _bulletVel: number = 1;
+        private _bulletVel: number = 5;
         private _player: enums.PlayerId;
-        //private _active:boolean;
 
-        // PUBLIC PROPERTIES
-        // get active():boolean
-        // {
-        //     return this._active;
-        // }
-        // set active(value:boolean)
-        // {
-        //     this._active = value;
-        // }
-        // constuctor
         get Player(): enums.PlayerId {
             return this._player;
         }
 
-        constructor(startPosition: Vector2, player: enums.PlayerId = enums.PlayerId.PLAYER) {
-            // from https://opengameart.org/content/bullets-game-asset
-            //super(config.Game.ASSETS.getResult("attack1"));
-            super(config.Game.ATLAS2, "Attack/linear-fire");
-            this.position = new Vector2(startPosition.x, startPosition.y, this);
-            //this.x = startPosition.x;
-            //this.y = startPosition.y;
+        constructor(startPosition: Vector2, player: enums.PlayerId = enums.PlayerId.PLAYER, attackSprite: string) {
+            super(config.Game.ATLAS2, attackSprite);
+
+            if (player == enums.PlayerId.ENEMY) {
+                // Make it rainnnn!
+                this.position = new Vector2(
+                    Math.floor(Math.random() * config.Game.SCREEN_WIDTH),
+                    config.Game.GAME_BAR_HEIGHT,
+                    this
+                );
+                this.rotation = 90;
+
+            } else {
+                this.position = new Vector2(startPosition.x, startPosition.y - 50, this);
+            }
+
             this._player = player;
-            //this._active = true;
         }
 
-        protected _checkBounds(): void {}
+        protected _checkBounds(): void {
+        }
 
         public isOutOfBounds(): boolean {
             if (this._player == enums.PlayerId.ENEMY) {
@@ -39,16 +37,18 @@ module objects {
             }
         }
 
-        public Start(): void {}
+        public Start(): void {
+        }
 
         public Update(): void {
             if (this._player == enums.PlayerId.ENEMY) {
-                this.position.x -= this._bulletVel;
+                this.position.y += this._bulletVel;
             } else {
                 this.position.x += this._bulletVel;
             }
         }
 
-        public Reset(): void {}
+        public Reset(): void {
+        }
     }
 }

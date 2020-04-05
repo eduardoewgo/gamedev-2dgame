@@ -21,9 +21,7 @@ module managers {
     export class GameBar {
         // PRIVATE INSTANCE MEMBERS
         private _plrOneLife: number;
-        private _plrTwoLife: number;
         private _plrOneXp: number;
-        private _plrTwoXp: number;
         private _gameStart: number;
 
         private _plrOneLifeBar: objects.GraphicBar;
@@ -31,12 +29,6 @@ module managers {
         private _plrOneXpBar: objects.GraphicBar;
         private _plrOneLevelLabel: objects.Label;
         private _plrOneStatus: Array<objects.Image>;
-
-        private _plrTwoLifeBar: objects.GraphicBar;
-        private _plrTwoHeartIcon: objects.Image;
-        private _plrTwoXpBar: objects.GraphicBar;
-        private _plrTwoLevelLabel: objects.Label;
-        private _plrTwoStatus: Array<objects.Image>;
 
         // This should match the same order as StatusType, so it is easier to get the index
         private _statusOrder = [
@@ -56,22 +48,15 @@ module managers {
                 this._plrOneXpBar,
                 this._plrOneLevelLabel,
                 this._plrOneHeartIcon,
-                this._plrTwoLifeBar,
-                this._plrTwoXpBar,
-                this._plrTwoHeartIcon,
-                this._plrTwoLevelLabel
             ];
             this._plrOneStatus.forEach(i => result.push(i));
-            this._plrTwoStatus.forEach(i => result.push(i));
             return result;
         }
 
         // CONSTRUCTOR
         constructor() {
             this._plrOneLife = 100;
-            this._plrTwoLife = 100;
             this._plrOneXp = 0;
-            this._plrTwoXp = 0;
             this._gameStart = new Date().getTime();
 
             this._plrOneLifeBar = new objects.GraphicBar(
@@ -98,33 +83,6 @@ module managers {
                 BARS_POS_X_P1 + BARS_WIDTH + 10,
                 XPB_POS_Y
             );
-
-            this._plrTwoLifeBar = new objects.GraphicBar(
-                BARS_POS_X_P2,
-                HB_POS_Y,
-                BARS_WIDTH,
-                HB_HEIGHT,
-                objects.GameBarType.HEALTH,
-                true
-            );
-            this._plrTwoHeartIcon = new objects.Image("heart", BARS_POS_X_P2 - 30, HB_POS_Y);
-            this._plrTwoXpBar = new objects.GraphicBar(
-                BARS_POS_X_P2,
-                XPB_POS_Y,
-                BARS_WIDTH,
-                XPB_HEIGHT,
-                objects.GameBarType.EXPERIENCE,
-                true
-            );
-            this._plrTwoLevelLabel = new objects.Label(
-                "LVL 1",
-                "bold 16px",
-                "Consolas",
-                "#021775",
-                BARS_POS_X_P2 - 55,
-                XPB_POS_Y
-            );
-            this._plrTwoStatus = this._createStatusBarImages(BARS_POS_X_P2 + BARS_WIDTH - 14, STATUS_POS_Y, -25);
 
             this._timerLabel = new objects.Label("000:00", "48px", "Consolas", "#000000", 640, 40, true);
         }
@@ -171,14 +129,6 @@ module managers {
                     config.Game.SCENE = scenes.State.END;
                     config.Game.WINNER = enums.PlayerId.ENEMY;
                 }
-            } else {
-                this._plrTwoLife -= damage;
-                this._plrTwoLifeBar.Value = this._plrTwoLife;
-
-                if (this._plrTwoLife <= 0) {
-                    config.Game.SCENE = scenes.State.END;
-                    config.Game.WINNER = enums.PlayerId.PLAYER;
-                }
             }
         }
 
@@ -202,16 +152,6 @@ module managers {
                 let posXpLvl = config.Game.ENEMY_STATUS.Level;
                 if (posXpLvl < constants.MAX_LEVEL) {
                     posXpLvl--;
-                    this._plrTwoXp += XP_POTION_VALUE;
-
-                    if (this._plrTwoXp >= XP_PER_LEVEL[posXpLvl]) {
-                        config.Game.ENEMY_STATUS.LevelUp();
-                        this._plrTwoLevelLabel.setText(`LVL ${config.Game.ENEMY_STATUS.Level}`);
-                        if (config.Game.ENEMY_STATUS.Level < constants.MAX_LEVEL) {
-                            this._plrTwoXp = 0;
-                        }
-                    }
-                    this._plrTwoXpBar.Value = (100 * this._plrTwoXp) / XP_PER_LEVEL[posXpLvl];
                 }
             }
         }
@@ -223,17 +163,11 @@ module managers {
                     this._plrOneLife = HP_MAX_VALUE;
                 }
                 this._plrOneLifeBar.Value = this._plrOneLife;
-            } else if (player == enums.PlayerId.ENEMY) {
-                this._plrTwoLife += HP_POTION_VALUE;
-                if (this._plrTwoLife > HP_MAX_VALUE) {
-                    this._plrTwoLife = HP_MAX_VALUE;
-                }
-                this._plrTwoLifeBar.Value = this._plrTwoLife;
             }
         }
 
         public ChangePlayerStatus(player: enums.PlayerId, type: enums.StatusTypes, status: enums.PowerUpStatus) {
-            let statusBar = player == enums.PlayerId.PLAYER ? this._plrOneStatus : this._plrTwoStatus;
+            let statusBar = this._plrOneStatus;
             let suffix = "";
 
             switch (status) {

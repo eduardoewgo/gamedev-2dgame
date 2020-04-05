@@ -26,6 +26,10 @@ module managers {
                 case config.Settings.KeyPlayerOneShoot:
                     this._keyStatus[enums.PlayerId.PLAYER][enums.PlayerKeys.SHOOT] = true;
                     break;
+
+                case config.Settings.KeyPlayerTwoShoot:
+                    this._keyStatus[enums.PlayerId.ENEMY][enums.PlayerKeys.SHOOT] = true;
+                    break;
             }
         }
 
@@ -49,6 +53,10 @@ module managers {
 
                 case config.Settings.KeyPlayerOneShoot:
                     this._keyStatus[enums.PlayerId.PLAYER][enums.PlayerKeys.SHOOT] = false;
+                    break;
+
+                case config.Settings.KeyPlayerTwoShoot:
+                    this._keyStatus[enums.PlayerId.ENEMY][enums.PlayerKeys.SHOOT] = false;
                     break;
             }
         }

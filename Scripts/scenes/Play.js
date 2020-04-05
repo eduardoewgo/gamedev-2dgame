@@ -31,7 +31,7 @@ var scenes;
                 var curTick = createjs.Ticker.getTicks();
                 if (curTick - bulletTick >= status.GetValue(enums.StatusTypes.ATK_SPEED)) {
                     player.Attack();
-                    var bullet = new objects.Bullet(player.position, player.PlayerId);
+                    var bullet = new objects.Bullet(player.position, player.PlayerId, player.PlayerId == enums.PlayerId.ENEMY ? "Attack/energy-ball" : "Attack/linear-fire");
                     this._bullets.push(bullet);
                     this.addChild(bullet);
                     return curTick;
@@ -132,8 +132,8 @@ var scenes;
             config.Game.GAME_BAR = this._gameBar;
             // Initialize the keyboard
             managers.Keyboard.Start();
-            this._plrOneBulletTick = 0;
-            this._plrTwoBulletTick = 0;
+            this._playerTick = 0;
+            this._enemyTick = 0;
             this._itemSpawnTicks = config.Game.INITIAL_ITEM_SPAWN_TICKER;
             this.Main();
         };
@@ -147,8 +147,8 @@ var scenes;
                 this._enemy.Update();
             }
             this._gameBar.Update();
-            this._plrOneBulletTick = this._plrShoot(this._player, config.Game.PLAYER_STATUS, this._plrOneBulletTick);
-            this._plrTwoBulletTick = this._plrShoot(this._enemy, config.Game.ENEMY_STATUS, this._plrTwoBulletTick);
+            this._playerTick = this._plrShoot(this._player, config.Game.PLAYER_STATUS, this._playerTick);
+            this._enemyTick = this._plrShoot(this._enemy, config.Game.ENEMY_STATUS, this._enemyTick);
             config.Game.PLAYER_STATUS.Update();
             config.Game.ENEMY_STATUS.Update();
             this._bullets.forEach(function (e, index) {

@@ -22,6 +22,9 @@ var managers;
                 case config.Settings.KeyPlayerOneShoot:
                     this._keyStatus[enums.PlayerId.PLAYER][enums.PlayerKeys.SHOOT] = true;
                     break;
+                case config.Settings.KeyPlayerTwoShoot:
+                    this._keyStatus[enums.PlayerId.ENEMY][enums.PlayerKeys.SHOOT] = true;
+                    break;
             }
         };
         Keyboard.onKeyUp = function (event) {
@@ -40,6 +43,9 @@ var managers;
                     break;
                 case config.Settings.KeyPlayerOneShoot:
                     this._keyStatus[enums.PlayerId.PLAYER][enums.PlayerKeys.SHOOT] = false;
+                    break;
+                case config.Settings.KeyPlayerTwoShoot:
+                    this._keyStatus[enums.PlayerId.ENEMY][enums.PlayerKeys.SHOOT] = false;
                     break;
             }
         };
