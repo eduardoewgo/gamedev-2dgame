@@ -37,6 +37,7 @@ var scenes;
             this._gameTitle = new objects.Label("Hero Quest", "120px", "Pixel", "#96ceb2", config.Game.SCREEN_WIDTH / 2 + 30, // For some reason this isn't being centered
             100, true);
             this._playerLabel = new objects.Label("Select your hero", "60px", "Pixel", "#ffcc5c", config.Game.SCREEN_WIDTH / 2, config.Game.SCREEN_HEIGHT / 2 - 100, true);
+            this._instructionLabel = new objects.Label("Stay alive as much as you can!", "30px", "Pixel", "#96ceb2", config.Game.SCREEN_WIDTH / 2, config.Game.SCREEN_HEIGHT - 200, true);
             // Buttons
             this._startButton = new objects.Button("GUI/PS4-X", 640, config.Game.SCREEN_HEIGHT - 100, true, 3);
             // Player one
@@ -51,6 +52,7 @@ var scenes;
             this.addChild(this._background);
             this.addChild(this._gameTitle);
             this.addChild(this._playerLabel);
+            this.addChild(this._instructionLabel);
             this.addChild(this._startButton);
             this.addChild(this._p1MageButton);
             this.addChild(this._p1RogueButton);

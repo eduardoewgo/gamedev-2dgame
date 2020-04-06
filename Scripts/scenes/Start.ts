@@ -4,6 +4,7 @@ module scenes {
         private _background: objects.Background;
         private _gameTitle: objects.Label;
         private _playerLabel: objects.Label;
+        private _instructionLabel: objects.Label;
         private _startButton: objects.Button;
 
         // Player selection handlers
@@ -47,6 +48,14 @@ module scenes {
                 config.Game.SCREEN_WIDTH / 2,
                 config.Game.SCREEN_HEIGHT / 2 - 100,
                 true);
+            this._instructionLabel = new objects.Label(
+                "Stay alive as much as you can!",
+                "30px",
+                "Pixel",
+                "#96ceb2",
+                config.Game.SCREEN_WIDTH / 2,
+                config.Game.SCREEN_HEIGHT - 200,
+                true);
 
             // Buttons
             this._startButton = new objects.Button(
@@ -80,6 +89,7 @@ module scenes {
             this.addChild(this._background);
             this.addChild(this._gameTitle);
             this.addChild(this._playerLabel);
+            this.addChild(this._instructionLabel);
             this.addChild(this._startButton);
 
             this.addChild(this._p1MageButton);
