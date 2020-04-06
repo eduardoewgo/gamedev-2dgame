@@ -123,18 +123,6 @@ module scenes {
             }
         }
 
-        private _createPowerUp(): void {
-            // Create an item every 30s to a minium of 10s (reducing 1s per item showed)
-            if (createjs.Ticker.getTicks() % this._itemSpawnTicks == 0) {
-                let powerUp = new objects.PowerUp();
-                this._powerUp.push(powerUp);
-                this.addChild(powerUp);
-                if (this._itemSpawnTicks > 10 * config.Game.FPS) {
-                    this._itemSpawnTicks -= config.Game.FPS;
-                }
-            }
-        }
-
         // PUBLIC METHODS
         public Start(): void {
             // Background
@@ -156,6 +144,31 @@ module scenes {
             this._enemyTick = 0;
 
             this._itemSpawnTicks = config.Game.INITIAL_ITEM_SPAWN_TICKER;
+
+            const rain = async (qty: number = 30) => {
+                for (let i = 0; i < qty; i++) {
+                    await this._sleep(750 - (qty * 10));
+                    enemyPower(this._enemy, config.Game.PLAYER_STATUS, this._enemyTick);
+                }
+                await this._sleep(5000);
+                await rain(qty + 20);
+            };
+            const enemyPower = (player: objects.Player, status: objects.PlayerStatus, bulletTick: number): void => {
+                let curTick = createjs.Ticker.getTicks();
+
+                if (curTick - bulletTick >= status.GetValue(enums.StatusTypes.ATK_SPEED)) {
+                    player.Attack();
+                    let bullet = new objects.Bullet(
+                        player.position,
+                        player.PlayerId,
+                        player.PlayerId == enums.PlayerId.ENEMY ? "Attack/energy-ball" : "Attack/linear-fire"
+                    );
+                    this._bullets.push(bullet);
+                    this.addChild(bullet);
+                }
+            };
+
+            setTimeout(rain, 5000);
 
             this.Main();
         }
@@ -197,6 +210,10 @@ module scenes {
                 floor.y = config.Game.SCREEN_HEIGHT - 18;
                 this.addChild(floor);
             }
+        }
+
+        private _sleep(ms = Math.floor(Math.random() * 750)) {
+            return new Promise(resolve => setTimeout(resolve, ms <= 0 ? 100 : ms));
         }
     }
 }

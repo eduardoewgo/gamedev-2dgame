@@ -11,6 +11,7 @@ module config {
         public static PLAYER_STATUS: objects.PlayerStatus;
         public static ENEMY_STATUS: objects.PlayerStatus;
 
+        public static TIME_ALIVE: string;
         public static WINNER: enums.PlayerId;
         public static SCENE: scenes.State;
         public static ASSETS: createjs.LoadQueue;

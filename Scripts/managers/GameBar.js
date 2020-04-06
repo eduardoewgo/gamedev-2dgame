@@ -83,6 +83,7 @@ var managers;
                 if (this._plrOneLife <= 0) {
                     config.Game.SCENE = scenes.State.END;
                     config.Game.WINNER = enums.PlayerId.ENEMY;
+                    config.Game.TIME_ALIVE = this._timerLabel.text;
                 }
             }
         };

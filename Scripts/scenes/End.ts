@@ -4,7 +4,9 @@ module scenes {
         private _background: objects.Background;
         private _endLabel: objects.Label;
         private _winnerLabel: objects.Label;
-        private _backButton: objects.Button;
+        private _player: objects.Button;
+        private _restart: objects.Button;
+
 
         // PUBLIC PROPERTIES
 
@@ -27,8 +29,8 @@ module scenes {
             //instantiate a new Text object
             this._endLabel = new objects.Label(`Game Over`, "80px", "Consolas", "#FFFF00", 620, 180, true);
             this._winnerLabel = new objects.Label(
-                `Player ${config.Game.WINNER + 1} Won`,
-                "80px",
+                `Great job, you stayed alive for ${config.Game.TIME_ALIVE}`,
+                "40px",
                 "Consolas",
                 "#FFFF00",
                 620,
@@ -36,21 +38,29 @@ module scenes {
                 true
             );
             // buttons
-            this._backButton = new objects.Button("btnBack", 620, 430, true);
+            this._player = new objects.Button(config.Game.PLAYER_CHARACTER, 620, 430, true);
+            this._restart = new objects.Button(
+                "GUI/PS4-X",
+                640,
+                config.Game.SCREEN_HEIGHT - 100,
+                true,
+                3);
 
             this.Main();
         }
 
-        public Update(): void {}
+        public Update(): void {
+        }
 
         public Main(): void {
             this.addChild(this._background);
             this.addChild(this._endLabel);
             this.addChild(this._winnerLabel);
 
-            this.addChild(this._backButton);
+            this.addChild(this._player);
+            this.addChild(this._restart);
 
-            this._backButton.on("click", () => {
+            this._restart.on("click", () => {
                 config.Game.SCENE = scenes.State.START;
             });
         }

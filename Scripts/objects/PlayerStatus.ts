@@ -210,7 +210,7 @@ module objects {
                 iniAr = 10;
                 incAr = 1;
             } else if (plrClass == constants.PlayerType.DEMON_IDLE) {
-                iniAS = 90;
+                iniAS = 20;
                 incAS = 5;
                 iniAP = 15;
                 incAP = 2;
